@@ -6,11 +6,10 @@
 * dimensions du plan de projection (ecran)
 * relation entre le joueur et le plan de projection (ecran)
 */
-#include <stdio.h>
 
 typedef struct s_player
 {
-	int	height;
+	// int	height;
 	// int	fov;
 	int	x;
 	int	y;
@@ -53,12 +52,15 @@ typedef struct s_player
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include "MLX42/MLX42.h"
 #include "../lib/MYLIB42/mylib42.h"
 
-#define WIDTH 512
-#define HEIGHT 512
-#define CUBE_SIZE 64
+#define SCREEN_WIDTH	320
+#define SCREEN_HEIGHT	200
+#define CUBE_SIZE		64
+#define FOV 			60.0
+#define M_PI			3.14159265358979323846
 
 
 
@@ -191,6 +193,38 @@ void	print_map(char **map, int x_max, int y_max)
 		y++;
 	}
 	
+}
+
+/**
+ * Convert degree to radian.
+ */
+double convert_degree_to_radian(double degree)
+{
+	return (degree * M_PI / 180);
+}
+
+/**
+ * Calculte the distance between the player and the camera plane.
+ */
+int	calculate_distance_between_player_and_plane(void)
+{
+	return ((SCREEN_WIDTH / 2) / tan(convert_degree_to_radian(FOV/2)));
+}
+
+/**
+ * Calculte the angle between each ray in degree.
+ */
+double	calculate_angle_between_each_ray(void)
+{
+	return (FOV / SCREEN_WIDTH);
+}
+
+/**
+ * Calculte the slope of a ray with the angle in degree.
+ */
+double	calculate_ray_slope(double degree)
+{
+	return (tan(convert_degree_to_radian(degree)));
 }
 
 int32_t main(void)
