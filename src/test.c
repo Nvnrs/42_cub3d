@@ -49,20 +49,7 @@ typedef struct s_player
 // See README in the root project for more information.
 // -----------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include "MLX42/MLX42.h"
-#include "../lib/MYLIB42/mylib42.h"
-
-#define SCREEN_WIDTH	320
-#define SCREEN_HEIGHT	200
-#define CUBE_SIZE		64
-#define FOV 			60.0
-#define M_PI			3.14159265358979323846
-
-
+#include "cub3d.h"
 
 // -----------------------------------------------------------------------------
 
@@ -229,39 +216,20 @@ double	calculate_ray_slope(double degree)
 
 int32_t main(void)
 {
-	t_player	player;
 	char **map;
+	mlx_t* mlx;
+	mlx_image_t* bg;
 	
 	map = map_test(10, 10);
-	player.x = 5 * CUBE_SIZE - CUBE_SIZE / 2;
-	player.y = 3 * CUBE_SIZE - CUBE_SIZE / 2;
-	printf("player is inside wall: %d\n", is_wall(CUBE_SIZE, CUBE_SIZE, map, 10, 10));
-	// mlx_t* mlx;
-
-	// // Gotta error check this stuff
-	// if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	// {
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	return(EXIT_FAILURE);
-	// }
-	// if (!(image = mlx_new_image(mlx, 128, 128)))
-	// {
-	// 	mlx_close_window(mlx);
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	return(EXIT_FAILURE);
-	// }
-	// if (mlx_image_to_window(mlx, image, 100, 300) == -1)
-	// {
-	// 	mlx_close_window(mlx);
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	return(EXIT_FAILURE);
-	// }
-	
-	// mlx_loop_hook(mlx, ft_randomize, mlx);
-	// mlx_loop_hook(mlx, ft_hook, mlx);
-
-	// mlx_loop(mlx);
-	// mlx_terminate(mlx);
-	print_map(map, 10, 10);
+	// Gotta error check this stuff
+	if (!(mlx = mlx_init(500, 500, "MLX42", true)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	bg = mlx_new_image(mlx, 500, 500);
+	mlx_image_to_window(mlx, bg, 0, 0);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }

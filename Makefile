@@ -6,7 +6,8 @@ SRC = $(SRC_DIR)/main.c \
 	$(SRC_DIR)/intersection_check.c \
 	$(SRC_DIR)/ray_calculation.c \
 	$(SRC_DIR)/raycasting.c \
-	$(SRC_DIR)/wall_calculation.c
+	$(SRC_DIR)/wall_calculation.c \
+	$(SRC_DIR)/draw_line.c
 
 
 ALLDIR = $(OBJ_DIR) \

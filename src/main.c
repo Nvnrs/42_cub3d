@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/04 11:32:59 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:33:33 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "calculation.h"
+#include "cub3d.h"
 
 char	**map_test(int x_max, int y_max)
 {
@@ -60,11 +61,72 @@ void	print_map(char **map, int x_max, int y_max)
 	
 }
 
+// IMAGES
+t_images	*init_images(mlx_t *mlx)
+{
+	t_images	*images;
+
+	images = malloc(sizeof(t_images));
+	images->bg = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	images->wall = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	return (images);
+}
+
+// void	free_images()
+// {
+	
+// }
+
+void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color)
+{
+	int	y;
+	int	x;
+
+	x = start.x;
+	y = start.y;
+	while (y < end.y)
+	{
+		x = start.x;
+		while (x < end.x)
+		{
+			mlx_put_pixel(image, x, y, color);
+			x++;
+		}
+		y++;
+	}	
+}
+
+void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg)
+{
+	t_coord	sky_start;
+	t_coord	sky_end;
+	t_coord	ground_start;
+	t_coord	ground_end;
+
+	// draw sky
+	sky_start.x = 0;
+	sky_start.y = 0;
+	sky_end.x = SCREEN_WIDTH;
+	sky_end.y = SCREEN_HEIGHT / 2;
+	fill_zone(sky_start, sky_end, bg, 0xFFFFFFFF);
+	ground_start.x = 0;
+	ground_start.y = SCREEN_HEIGHT / 2;
+	ground_end.x = SCREEN_WIDTH;
+	ground_end.y = SCREEN_HEIGHT;
+	fill_zone(sky_start, sky_end, bg, 0xFFFFFFAA);
+	mlx_image_to_window(mlx, bg, 0, 0);
+}
+
 int	main(void)
 {
 	t_player	player;
 	t_map		map;
+	t_images	*images;
+	mlx_t		*mlx;
 	
+	mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "MLX42", true);
+	images = init_images(mlx);
+	draw_and_put_bg(mlx, images->bg);
 	map.grid = map_test(10, 10);
 	map.x_max = 10;
 	map.y_max = 10;
@@ -72,6 +134,10 @@ int	main(void)
 	player.y = 3 * CUBE_SIZE - CUBE_SIZE / 2;
 	player.direction_angle = 90;
 	print_map(map.grid, 10, 10);
-	raycasting(player, map);
+	raycasting(player, map, images);
+	mlx_image_to_window(mlx, images->wall, 0, 0);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+
 	return (0);
 }
