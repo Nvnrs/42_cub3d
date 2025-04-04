@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:10 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/04 10:52:49 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:50:13 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	calculate_angle_between_each_ray(void)
  */
 double	calculate_ray_slope(t_ray ray)
 {
-	return (tan(convert_degree_to_radian(ray.angle)));
+	return (tan(convert_degree_to_radian(ray.direction_angle)));
 }
 /**
  * Calculate the ray's y intercept from the ray slope and the player's position.
@@ -35,10 +35,10 @@ double	calculate_ray_y_intercept(t_ray ray, t_player player)
 	return (player.y - ray.slope * player.x);
 }
 
-/**
- * Calculate the ray's direction from the player's direction angle and the ray's angle.
- */
-double	calculate_ray_direction(t_player player, t_ray ray)
-{
-	return (player.direction_angle - FOV / 2 + ray.angle);
-}
+// /**
+//  * Calculate the ray's direction from the player's direction angle and the ray's angle.
+//  */
+// double	calculate_ray_direction(t_player player, t_ray ray)
+// {
+// 	return (player.direction_angle - FOV / 2 + ray.angle);//attention quand l'angle passe par 0/360 degree, a ajouter.
+// }

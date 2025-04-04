@@ -1,6 +1,13 @@
 SRC_DIR = /src
 
-SRC = $(SRC_DIR)/test.c
+SRC = $(SRC_DIR)/main.c \
+	$(SRC_DIR)/calculation_utils.c \
+	$(SRC_DIR)/distance_calculation.c \
+	$(SRC_DIR)/intersection_check.c \
+	$(SRC_DIR)/ray_calculation.c \
+	$(SRC_DIR)/raycasting.c \
+	$(SRC_DIR)/wall_calculation.c
+
 
 ALLDIR = $(OBJ_DIR) \
 		$(OBJ_DIR)$(SRC_DIR)

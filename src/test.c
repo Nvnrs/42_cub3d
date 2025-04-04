@@ -53,7 +53,7 @@ typedef struct s_player
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
+#include "MLX42/MLX42.h"
 #include "../lib/MYLIB42/mylib42.h"
 
 #define SCREEN_WIDTH	320
