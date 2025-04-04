@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calculation.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/04 10:52:03 by pchateau          #+#    #+#             */
+/*   Updated: 2025/04/04 10:56:41 by pchateau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CALCULATION_H
 # define CALCULATION_H
 
@@ -5,7 +17,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-#include "MLX42/MLX42.h"
+#include "../lib/MLX42/include/MLX42/MLX42.h"//modifier dans le Makefile
 #include "../lib/MYLIB42/mylib42.h"
 
 #define SCREEN_WIDTH	320
@@ -50,7 +62,7 @@ t_bool	is_wall(int x, int y, t_map map);
 int	vertical_intersection(t_ray ray, t_player player, t_map map);
 int	horizontal_intersection(t_ray ray, t_player player, t_map map);
 
-double	calculate_angle_between_each_ray(void)
+double	calculate_angle_between_each_ray(void);
 double	calculate_ray_slope(t_ray ray);
 double	calculate_ray_y_intercept(t_ray ray, t_player player);
 double	calculate_ray_direction(t_player player, t_ray ray);

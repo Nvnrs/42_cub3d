@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   distance_calculation.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/04 10:52:05 by pchateau          #+#    #+#             */
+/*   Updated: 2025/04/04 10:52:44 by pchateau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "calculation.h"
+
 /**
  * Calculte the distance between the player and the camera plane.
  */

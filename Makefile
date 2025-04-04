@@ -9,7 +9,7 @@ OBJ_DIR = ./obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 CC = cc
 MLX_FLAGS = -ldl -lglfw -pthread -lm
-CFLAGS += -Wall -Wextra -Werror -g -Isrc -Ilib/MLX42/include
+CFLAGS += -Wall -Wextra -Werror -g -Isrc -Ilib/MLX42/include/MLX42
 NAME = cub3D
 
 LIB_DIR = ./lib

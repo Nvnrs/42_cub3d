@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersection_check.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/04 10:52:08 by pchateau          #+#    #+#             */
+/*   Updated: 2025/04/04 10:52:47 by pchateau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "calculation.h"
+
 /**
  * Check if the given point in the map's grid is in a wall or not.
  * Return TRUE or FALSE.
