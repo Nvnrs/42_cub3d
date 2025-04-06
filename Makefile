@@ -1,6 +1,6 @@
 SRC_DIR = /src
 
-SRC = $(SRC_DIR)/main.c \
+SRC = $(SRC_DIR)/parsing.c \
 	$(SRC_DIR)/calculation_utils.c \
 	$(SRC_DIR)/distance_calculation.c \
 	$(SRC_DIR)/intersection_check.c \
@@ -17,7 +17,8 @@ OBJ_DIR = ./obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 CC = cc
 MLX_FLAGS = -ldl -lglfw -pthread -lm
-CFLAGS += -Wall -Wextra -Werror -g -Isrc -Ilib/MLX42/include/MLX42
+CFLAGS += -g -Isrc -Ilib/MLX42/include/MLX42
+# CFLAGS += -Wall -Wextra -Werror -g -Isrc -Ilib/MLX42/include/MLX42
 NAME = cub3D
 
 LIB_DIR = ./lib
