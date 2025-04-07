@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:21:13 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/06 22:38:51 by nicolas          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:49:48 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/MYLIB42/mylib42.h"
 
-#define SCREEN_WIDTH	1024
-#define SCREEN_HEIGHT	768
+#define SCREEN_WIDTH	1920
+#define SCREEN_HEIGHT	1080
 #define CUBE_SIZE		64
 #define FOV 			60.0
-// #define M_PI			3.14159265358979323846
+#define M_PI			3.14159265358979323846
 
 typedef struct	s_key_val
 {

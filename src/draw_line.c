@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/04 18:34:38 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:10:45 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "calculation.h"
+
+t_bool	is_inside_screen_float(t_coord_float point)
+{
+	if (point.x >= SCREEN_WIDTH || point.x < 0)
+		return (FALSE);
+	if (point.y >= SCREEN_HEIGHT || point.y < 0)
+		return (FALSE);
+	return (TRUE);
+}
 
 void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2)
 {
@@ -32,7 +41,8 @@ void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2)
 	i = 1;
 	while (i < length)
 	{
-		mlx_put_pixel(image, coord.x, coord.y, 0x0000FF);
+		if (is_inside_screen_float(coord))
+			mlx_put_pixel(image, coord.x, coord.y, 0x0000FF);
 		coord.x += d.x;
 		coord.y += d.y;
 		i++;

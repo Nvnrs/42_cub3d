@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculation.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:03 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/04 18:35:45 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:48:41 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_ray
 	int		fixed_distance;
 	int		wall_height;
 	int		x_on_screen;
+	t_bool	is_facing_right;
+	t_bool	is_facing_left;
+	t_bool	is_facing_up;
+	t_bool	is_facing_down;
 }	t_ray;
 
 void	raycasting(t_player player, t_map map, t_images *images);
@@ -62,7 +66,7 @@ int	calculate_distance_between_two_points(int xa, int ya, int xb, int yb);
 int	calculate_distance_between_player_and_plane(void);
 int	fix_fish_eye_effect(t_ray ray, t_player player);
 
-t_bool	is_wall(int x, int y, t_map map);
+t_bool	is_wall(int x, int y, t_map map, t_ray ray);
 int	vertical_intersection(t_ray ray, t_player player, t_map map);
 int	horizontal_intersection(t_ray ray, t_player player, t_map map);
 

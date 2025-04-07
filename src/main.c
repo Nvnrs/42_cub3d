@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/04 18:33:33 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:51:02 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**map_test(int x_max, int y_max)
 				map[y][x] = '1';
 			else
 				map[y][x] = '0';
-			if (x == 5 && y == 3)
+			if (x == 5 && y == y_max - 3)
 				map[y][x] = 'P';
 			x++;
 		}
@@ -131,13 +131,12 @@ int	main(void)
 	map.x_max = 10;
 	map.y_max = 10;
 	player.x = 5 * CUBE_SIZE - CUBE_SIZE / 2;
-	player.y = 3 * CUBE_SIZE - CUBE_SIZE / 2;
-	player.direction_angle = 90;
+	player.y = (map.y_max - 5) * CUBE_SIZE - CUBE_SIZE / 2;
+	player.direction_angle = 180 - 45;
 	print_map(map.grid, 10, 10);
 	raycasting(player, map, images);
 	mlx_image_to_window(mlx, images->wall, 0, 0);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-
 	return (0);
 }
