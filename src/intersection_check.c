@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:08 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 11:51:56 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:34:16 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	vertical_intersection(t_ray ray, t_player player, t_map map)
 	int	y;
 	int	distance_between_player_and_wall;
 	int	x_step;
+	int	y_step;
 
 	pixel_to_first_intersection = player.x % CUBE_SIZE;//attention a la limite
 	if (ray.is_facing_right)//attention a la limite
@@ -62,10 +63,18 @@ int	vertical_intersection(t_ray ray, t_player player, t_map map)
 		x_step = CUBE_SIZE;
 	else
 		x_step = -CUBE_SIZE;
+	// y_step = CUBE_SIZE * ray.slope;
+	y_step = x_step * ray.slope;
+	// if ((ray.is_facing_up && y_step > 0) || (ray.is_facing_down && y_step < 0))
+	// {
+	// 	y_step *= -1;
+	// 	y = -ray.slope * x + ray.y_intercept;
+	// }
 	while (!is_wall(x, y, map, ray))
 	{
 		x += x_step;
-		y = ray.slope * x + ray.y_intercept;
+		y += y_step;
+		// y = ray.slope * x + ray.y_intercept;
 	}
 	printf("VERTICAL_INTERSECTION LAST x: %d\n", x);
 	printf("VERTICAL_INTERSECTION LAST y: %d\n", y);
@@ -86,6 +95,7 @@ int	horizontal_intersection(t_ray ray, t_player player, t_map map)
 	int	y;
 	int	distance_between_player_and_wall;
 	int	y_step;
+	int	x_step;
 
 	pixel_to_first_intersection = player.y % CUBE_SIZE;//attention a la limite
 	if (ray.is_facing_down)
@@ -99,10 +109,15 @@ int	horizontal_intersection(t_ray ray, t_player player, t_map map)
 		y_step = CUBE_SIZE;
 	else
 		y_step = -CUBE_SIZE;
+	x_step = y_step / ray.slope;
+	// x_step = CUBE_SIZE / ray.slope;
+	// if ((ray.is_facing_left && x_step > 0) || (ray.is_facing_right && x_step < 0))
+	// 	x_step *= -1;
 	while (!is_wall(x, y, map, ray))
 	{
 		y += y_step;
-		x = (y - ray.y_intercept) / ray.slope;
+		x += x_step;
+		// x = (y - ray.y_intercept) / ray.slope;
 	}
 	printf("HORIZONTAL_INTERSECTION LAST y: %d\n", y);
 	printf("HORIZONTAL_INTERSECTION LAST x: %d\n", x);
