@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:21:13 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/07 14:49:48 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:17:21 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/MYLIB42/mylib42.h"
 
-#define SCREEN_WIDTH	1920
-#define SCREEN_HEIGHT	1080
+#define SCREEN_WIDTH	320
+#define SCREEN_HEIGHT	200
 #define CUBE_SIZE		64
 #define FOV 			60.0
 #define M_PI			3.14159265358979323846

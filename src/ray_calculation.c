@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:10 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/07 14:43:17 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:29:09 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	calculate_angle_between_each_ray(void)
  */
 double	calculate_ray_slope(t_ray ray)
 {
-	return (tan(convert_degree_to_radian(ray.direction_angle - 90)));
+	return (tan(convert_degree_to_radian(ray.direction_angle)));
 }
 /**
  * Calculate the ray's y intercept from the ray slope and the player's position.

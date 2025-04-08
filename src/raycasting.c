@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:13 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/07 14:44:23 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:08:49 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,23 @@ void	raycasting(t_player player, t_map map, t_images *images)
 		ray.direction_angle = player.direction_angle - FOV / 2 + (double)i / SCREEN_WIDTH * FOV;
 		if (ray.direction_angle > 0 && ray.direction_angle < 180)
 		{
-			ray.is_facing_right = TRUE;
-			ray.is_facing_left = FALSE;
+			ray.is_facing_up = TRUE;
+			ray.is_facing_down = FALSE;
 		}
 		else
 		{
-			ray.is_facing_right = FALSE;
-			ray.is_facing_left = TRUE;
+			ray.is_facing_up = FALSE;
+			ray.is_facing_down = TRUE;
 		}
 		if (ray.direction_angle > 90 && ray.direction_angle < 270)
 		{
-			ray.is_facing_down = TRUE;
-			ray.is_facing_up = FALSE;
+			ray.is_facing_left = TRUE;
+			ray.is_facing_right = FALSE;
 		}
 		else
 		{
-			ray.is_facing_down = FALSE;
-			ray.is_facing_up = TRUE;
+			ray.is_facing_left = FALSE;
+			ray.is_facing_right = TRUE;
 		}
 		ray.slope = calculate_ray_slope(ray);
 		ray.y_intercept = calculate_ray_y_intercept(ray, player);
@@ -81,6 +81,8 @@ void	raycasting(t_player player, t_map map, t_images *images)
 		draw_wall(images, ray);
 		// printf("ray number %d -> wall height: %d\n", i, ray.wall_height);
 		print_ray_info(ray);
+		printf("Player x: %d\n", player.x);
+		printf("Player y: %d\n", player.y);
 		i++;
 	}
 }
