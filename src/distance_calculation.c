@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:05 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/07 14:48:49 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:35:52 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Calculte the distance between the player and the camera plane.
  */
-int	calculate_distance_between_player_and_plane(void)
+float	calculate_distance_between_player_and_plane(void)
 {
 	return ((SCREEN_WIDTH / 2) / tan(convert_degree_to_radian(FOV/2)));
 }
@@ -23,12 +23,12 @@ int	calculate_distance_between_player_and_plane(void)
 /**
  * Calculate the distance between two points.
  */
-int	calculate_distance_between_two_points(int xa, int ya, int xb, int yb)
+float	calculate_distance_between_two_points(int xa, int ya, int xb, int yb)
 {
 	return (sqrt(pow(xb - xa, 2) + pow(yb - ya, 2)));
 }
 
-int	fix_fish_eye_effect(t_ray ray, t_player player)
+float	fix_fish_eye_effect(t_ray ray, t_player player)
 {
 	// if (ray.direction_angle < player.direction_angle)
 	// 	return (ray.smallest_distance * cos(convert_degree_to_radian(30)));

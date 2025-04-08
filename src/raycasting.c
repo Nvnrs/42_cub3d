@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:13 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 11:08:49 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:43:32 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	print_ray_info(t_ray ray)
 	printf("Direction angle: %f\n", ray.direction_angle);
 	printf("Slope: %f\n", ray.slope);
 	printf("Y-intercept: %f\n", ray.y_intercept);
-	printf("Vertical intersection distance: %d\n", ray.distance_vertical_intersection);
-	printf("Horizontal intersection distance: %d\n", ray.distance_horizontal_intersection);
-	printf("Smallest intersection distance: %d\n", ray.smallest_distance);
-	printf("Fixed distance: %d\n", ray.fixed_distance);
-	printf("Wall height: %d\n", ray.wall_height);
+	printf("Vertical intersection distance: %f\n", ray.distance_vertical_intersection);
+	printf("Horizontal intersection distance: %f\n", ray.distance_horizontal_intersection);
+	printf("Smallest intersection distance: %f\n", ray.smallest_distance);
+	printf("Fixed distance: %f\n", ray.fixed_distance);
+	printf("Wall height: %f\n", ray.wall_height);
 	if (ray.is_facing_right)
 		printf("Facing right\n");
 	if (ray.is_facing_left)
@@ -48,6 +48,10 @@ void	raycasting(t_player player, t_map map, t_images *images)
 	{
 		ray.x_on_screen = i;
 		ray.direction_angle = player.direction_angle - FOV / 2 + (double)i / SCREEN_WIDTH * FOV;
+		if (ray.direction_angle >= 360)
+			ray.direction_angle -= 360;
+		else if (ray.direction_angle < 0)
+			ray.direction_angle += 360;
 		if (ray.direction_angle > 0 && ray.direction_angle < 180)
 		{
 			ray.is_facing_up = TRUE;
@@ -78,11 +82,10 @@ void	raycasting(t_player player, t_map map, t_images *images)
 			ray.smallest_distance = ray.distance_horizontal_intersection;
 		ray.fixed_distance = fix_fish_eye_effect(ray, player);
 		ray.wall_height = calculate_wall_height(ray.fixed_distance);
-		draw_wall(images, ray);
-		// printf("ray number %d -> wall height: %d\n", i, ray.wall_height);
 		print_ray_info(ray);
 		printf("Player x: %d\n", player.x);
 		printf("Player y: %d\n", player.y);
+		draw_wall(images, ray);
 		i++;
 	}
 }

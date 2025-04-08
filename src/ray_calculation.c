@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:10 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 11:29:09 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:16:34 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Calculte the angle between each ray in degree.
  */
-double	calculate_angle_between_each_ray(void)
+float	calculate_angle_between_each_ray(void)
 {
 	return (FOV / SCREEN_WIDTH);
 }
@@ -23,14 +23,14 @@ double	calculate_angle_between_each_ray(void)
 /**
  * Calculte the slope of a ray with its angle in degree.
  */
-double	calculate_ray_slope(t_ray ray)
+float	calculate_ray_slope(t_ray ray)
 {
 	return (tan(convert_degree_to_radian(ray.direction_angle)));
 }
 /**
  * Calculate the ray's y intercept from the ray slope and the player's position.
  */
-double	calculate_ray_y_intercept(t_ray ray, t_player player)
+float	calculate_ray_y_intercept(t_ray ray, t_player player)
 {
 	return (player.y - ray.slope * player.x);
 }
@@ -38,7 +38,7 @@ double	calculate_ray_y_intercept(t_ray ray, t_player player)
 // /**
 //  * Calculate the ray's direction from the player's direction angle and the ray's angle.
 //  */
-// double	calculate_ray_direction(t_player player, t_ray ray)
+// float	calculate_ray_direction(t_player player, t_ray ray)
 // {
 // 	return (player.direction_angle - FOV / 2 + ray.angle);//attention quand l'angle passe par 0/360 degree, a ajouter.
 // }
