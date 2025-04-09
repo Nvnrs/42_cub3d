@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:08 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 10:52:03 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:56:15 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_bool	is_wall(float x, float y, t_map map, t_ray ray, int is_vertical_check)
  */
 void	vertical_intersection(t_ray *ray, t_player player, t_map map)
 {
-	float	pixel_to_first_intersection;
-	float	x;
-	float	y;
+	int	pixel_to_first_intersection;
+	int	x;
+	int	y;
 	// float	distance_between_player_and_wall;
 	float	x_step;
 	float	y_step;
@@ -83,8 +83,8 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map)
 		// x = (player.x / CUBE_SIZE) * CUBE_SIZE;
 		// x = (player.x / CUBE_SIZE) * CUBE_SIZE - 1;
 	y = ray->slope * x + ray->y_intercept;
-	printf("VERTICAL_INTERSECTION FIRST x: %f\n", x);
-	printf("VERTICAL_INTERSECTION FIRST y: %f\n", y);
+	printf("VERTICAL_INTERSECTION FIRST x: %d\n", x);
+	printf("VERTICAL_INTERSECTION FIRST y: %d\n", y);
 	if (ray->is_facing_right)
 		x_step = CUBE_SIZE;
 	else
@@ -95,10 +95,10 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map)
 		x += x_step;
 		y += y_step;
 	}
-	// printf("VERTICAL_INTERSECTION LAST x: %f\n", x);
-	// printf("VERTICAL_INTERSECTION LAST y: %f\n", y);
-	// printf("x_in_grid = %f\n", x / CUBE_SIZE);
-	// printf("y_in_grid = %f\n", y / CUBE_SIZE);
+	printf("VERTICAL_INTERSECTION LAST x: %d\n", x);
+	printf("VERTICAL_INTERSECTION LAST y: %d\n", y);
+	printf("x_in_grid = %d\n", x / CUBE_SIZE);
+	printf("y_in_grid = %d\n", y / CUBE_SIZE);
 	ray->x_ver = x;
 	ray->y_ver = y;
 	ray->distance_vertical_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
@@ -112,9 +112,9 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map)
  */
 void	horizontal_intersection(t_ray *ray, t_player player, t_map map)
 {
-	float	pixel_to_first_intersection;
-	float	x;
-	float	y;
+	int	pixel_to_first_intersection;
+	int	x;
+	int	y;
 	// float	distance_between_player_and_wall;
 	float	y_step;
 	float	x_step;
@@ -127,8 +127,8 @@ void	horizontal_intersection(t_ray *ray, t_player player, t_map map)
 		// y = (player.y / CUBE_SIZE) * CUBE_SIZE;
 		// y = (player.y / CUBE_SIZE) * CUBE_SIZE - 1;
 	x = (y - ray->y_intercept) / ray->slope;
-	// printf("HORIZONTAL_INTERSECTION FIRST y: %f\n", y);
-	// printf("HORIZONTAL_INTERSECTION FIRST x: %f\n", x);
+	printf("HORIZONTAL_INTERSECTION FIRST y: %d\n", y);
+	printf("HORIZONTAL_INTERSECTION FIRST x: %d\n", x);
 	if (ray->is_facing_down)
 		y_step = CUBE_SIZE;
 	else
@@ -139,10 +139,10 @@ void	horizontal_intersection(t_ray *ray, t_player player, t_map map)
 		y += y_step;
 		x += x_step;
 	}
-	// printf("HORIZONTAL_INTERSECTION LAST y: %f\n", y);
-	// printf("HORIZONTAL_INTERSECTION LAST x: %f\n", x);
-	// printf("x_in_grid = %f\n", x / CUBE_SIZE);
-	// printf("y_in_grid = %f\n", y / CUBE_SIZE);
+	printf("HORIZONTAL_INTERSECTION LAST y: %d\n", y);
+	printf("HORIZONTAL_INTERSECTION LAST x: %d\n", x);
+	printf("x_in_grid = %d\n", x / CUBE_SIZE);
+	printf("y_in_grid = %d\n", y / CUBE_SIZE);
 	ray->x_hor = x;
 	ray->y_hor = y;
 	ray->distance_horizontal_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);

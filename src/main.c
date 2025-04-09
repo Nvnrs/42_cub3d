@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 11:49:40 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:53:40 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	main(void)
 	map.y_max = 10;
 	player.x = 2 * CUBE_SIZE - CUBE_SIZE / 2;
 	player.y = (map.y_max - 5) * CUBE_SIZE - CUBE_SIZE / 2;
-	player.direction_angle = 270;
+	player.direction_angle = 0;
 	print_map(map.grid, 10, 10);
 	draw_bg_minimap(images);
 	raycasting(player, map, images);

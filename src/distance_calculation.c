@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:05 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 17:35:52 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:08:57 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,8 @@ float	fix_fish_eye_effect(t_ray ray, t_player player)
 	// 	return (ray.smallest_distance * cos(convert_degree_to_radian(-30)));
 	// else
 	// 	return (ray.smallest_distance);
-	return (ray.smallest_distance * cos(convert_degree_to_radian(player.direction_angle - ray.direction_angle)));
+	float	angle;
+	
+	angle = fabs(player.direction_angle - ray.direction_angle);
+	return (ray.smallest_distance * cos(convert_degree_to_radian(angle)));
 }

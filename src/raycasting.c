@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:13 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 11:20:55 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:42:03 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	print_ray_info(t_ray ray)
 {
-	printf("---------------------------\n");
-	printf("Ray number: %d\n\n", ray.x_on_screen);
+	// printf("---------------------------\n");
+	// printf("Ray number: %d\n\n", ray.x_on_screen);
 	printf("Direction angle: %f\n", ray.direction_angle);
 	printf("Slope: %f\n", ray.slope);
 	printf("Y-intercept: %f\n", ray.y_intercept);
@@ -47,6 +47,8 @@ void	raycasting(t_player player, t_map map, t_images *images)
 	while (i < SCREEN_WIDTH)
 	{
 		ray.x_on_screen = i;
+		printf("---------------------------\n");
+		printf("Ray number: %d\n\n", ray.x_on_screen);
 		ray.direction_angle = player.direction_angle - FOV / 2 + (double)i / SCREEN_WIDTH * FOV;
 		if (ray.direction_angle >= 360)
 			ray.direction_angle -= 360;
