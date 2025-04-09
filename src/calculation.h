@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:03 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 18:01:46 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:39:40 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct s_ray
 	t_bool	is_facing_left;
 	t_bool	is_facing_up;
 	t_bool	is_facing_down;
+	int		x_hor;
+	int		y_hor;
+	int		x_ver;
+	int		y_ver;
+	int		x_smallest;
+	int		y_smallest;
 }	t_ray;
 
 void	raycasting(t_player player, t_map map, t_images *images);
@@ -67,8 +73,8 @@ float	calculate_distance_between_player_and_plane(void);
 float	fix_fish_eye_effect(t_ray ray, t_player player);
 
 t_bool	is_wall(float x, float y, t_map map, t_ray ray, int is_vertical_check);
-float	vertical_intersection(t_ray ray, t_player player, t_map map);
-float	horizontal_intersection(t_ray ray, t_player player, t_map map);
+void	vertical_intersection(t_ray *ray, t_player player, t_map map);
+void	horizontal_intersection(t_ray *ray, t_player player, t_map map);
 
 float	calculate_angle_between_each_ray(void);
 float	calculate_ray_slope(t_ray ray);
@@ -78,5 +84,10 @@ float	calculate_ray_y_intercept(t_ray ray, t_player player);
 float	calculate_wall_height(float distance_between_player_and_wall);
 
 void	draw_wall(t_images *images, t_ray ray);
+
+void	draw_player_on_minimap(t_player player, t_images *images);
+void	draw_ray_on_minimap(t_player player, t_ray ray, t_images *images);
+void	draw_bg_minimap(t_images *images);
+void	draw_border_minimap(t_images *images);
 
 #endif

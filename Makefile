@@ -7,7 +7,8 @@ SRC = $(SRC_DIR)/main.c \
 	$(SRC_DIR)/ray_calculation.c \
 	$(SRC_DIR)/raycasting.c \
 	$(SRC_DIR)/wall_calculation.c \
-	$(SRC_DIR)/draw_line.c
+	$(SRC_DIR)/draw_line.c \
+	$(SRC_DIR)/minimap.c
 
 
 ALLDIR = $(OBJ_DIR) \

@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:21:13 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/08 17:47:47 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:48:36 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ typedef struct	s_images
 {
 	mlx_image_t *bg;
 	mlx_image_t *wall;
+	mlx_image_t	*minimap;
 } t_images;
 
-void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2);
+void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2, uint32_t color);
+void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
 
 #endif

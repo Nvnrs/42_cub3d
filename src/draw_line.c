@@ -6,23 +6,23 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/08 16:24:50 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:27:22 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "calculation.h"
 
-t_bool	is_inside_screen_float(t_coord_float point)
+t_bool	is_inside_screen_float(t_coord_float point, mlx_image_t *image)
 {
-	if (point.x >= SCREEN_WIDTH || point.x < 0)
+	if (point.x >= image->width || point.x < 0)
 		return (FALSE);
-	if (point.y >= SCREEN_HEIGHT || point.y < 0)
+	if (point.y >= image->height || point.y < 0)
 		return (FALSE);
 	return (TRUE);
 }
 
-void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2)
+void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2, uint32_t color)
 {
 	float			length;
 	t_coord_float	d;
@@ -41,8 +41,8 @@ void	draw_line(mlx_image_t *image, t_coord c1, t_coord c2)
 	i = 1;
 	while (i < length)
 	{
-		if (is_inside_screen_float(coord))
-			mlx_put_pixel(image, coord.x, coord.y, 0x0000FF);
+		if (is_inside_screen_float(coord, image))
+			mlx_put_pixel(image, coord.x, coord.y, color);
 		coord.x += d.x;
 		coord.y += d.y;
 		i++;
@@ -58,5 +58,5 @@ void	draw_wall(t_images *images, t_ray ray)
 	b.x = ray.x_on_screen;
 	a.y = (SCREEN_HEIGHT - ray.wall_height) / 2;
 	b.y = (SCREEN_HEIGHT - ray.wall_height) / 2 + ray.wall_height;
-	draw_line(images->wall, a, b);
+	draw_line(images->wall, a, b, 0x0000FFFF);
 }

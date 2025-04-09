@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:13 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 17:43:32 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:20:55 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,29 @@ void	raycasting(t_player player, t_map map, t_images *images)
 		}
 		ray.slope = calculate_ray_slope(ray);
 		ray.y_intercept = calculate_ray_y_intercept(ray, player);
-		ray.distance_vertical_intersection = vertical_intersection(ray, player, map);
-		ray.distance_horizontal_intersection = horizontal_intersection(ray, player, map);
+		// ray.distance_vertical_intersection = vertical_intersection(ray, player, map);
+		vertical_intersection(&ray, player, map);
+		// ray.distance_horizontal_intersection = horizontal_intersection(&ray, player, map);
+		horizontal_intersection(&ray, player, map);
 		if (ray.distance_vertical_intersection < ray.distance_horizontal_intersection)
+		{
 			ray.smallest_distance = ray.distance_vertical_intersection;
+			ray.x_smallest = ray.x_ver;
+			ray.y_smallest = ray.y_ver;
+		}
 		else
+		{
 			ray.smallest_distance = ray.distance_horizontal_intersection;
+			ray.x_smallest = ray.x_hor;
+			ray.y_smallest = ray.y_hor;
+		}
 		ray.fixed_distance = fix_fish_eye_effect(ray, player);
 		ray.wall_height = calculate_wall_height(ray.fixed_distance);
 		print_ray_info(ray);
 		printf("Player x: %d\n", player.x);
 		printf("Player y: %d\n", player.y);
 		draw_wall(images, ray);
+		draw_ray_on_minimap(player, ray, images);
 		i++;
 	}
 }

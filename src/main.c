@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/08 17:45:14 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:49:40 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_images	*init_images(mlx_t *mlx)
 	images = malloc(sizeof(t_images));
 	images->bg = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	images->wall = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	images->minimap = mlx_new_image(mlx, SCREEN_HEIGHT / 4, SCREEN_HEIGHT / 4);
 	return (images);
 }
 
@@ -132,10 +133,15 @@ int	main(void)
 	map.y_max = 10;
 	player.x = 2 * CUBE_SIZE - CUBE_SIZE / 2;
 	player.y = (map.y_max - 5) * CUBE_SIZE - CUBE_SIZE / 2;
-	player.direction_angle = 90;
+	player.direction_angle = 270;
 	print_map(map.grid, 10, 10);
+	draw_bg_minimap(images);
 	raycasting(player, map, images);
+	draw_border_minimap(images);
+	draw_player_on_minimap(player, images);
 	mlx_image_to_window(mlx, images->wall, 0, 0);
+	mlx_image_to_window(mlx, images->minimap,
+		SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);
