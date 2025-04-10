@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:05 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 14:08:57 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:32:22 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ float	calculate_distance_between_player_and_plane(void)
  */
 float	calculate_distance_between_two_points(int xa, int ya, int xb, int yb)
 {
-	return (sqrt(pow(xb - xa, 2) + pow(yb - ya, 2)));
+	return (sqrtf(pow(xb - xa, 2) + pow(yb - ya, 2)));
 }
 
 float	fix_fish_eye_effect(t_ray ray, t_player player)
@@ -38,6 +38,6 @@ float	fix_fish_eye_effect(t_ray ray, t_player player)
 	// 	return (ray.smallest_distance);
 	float	angle;
 	
-	angle = fabs(player.direction_angle - ray.direction_angle);
-	return (ray.smallest_distance * cos(convert_degree_to_radian(angle)));
+	angle = convert_degree_to_radian(player.direction_angle - ray.direction_angle);
+	return (ray.smallest_distance * cos(angle));
 }

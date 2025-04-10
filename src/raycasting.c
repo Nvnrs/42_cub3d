@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:13 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/10 10:22:38 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:41:43 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,38 @@ void	print_ray_info(t_ray ray)
 		printf("Facing up\n");
 }
 
+void	where_is_the_ray_facing(t_ray *ray)
+{
+	if (ray->direction_angle > 0 && ray->direction_angle < 180)
+	{
+		ray->is_facing_up = TRUE;
+		ray->is_facing_down = FALSE;
+	}
+	else
+	{
+		ray->is_facing_up = FALSE;
+		ray->is_facing_down = TRUE;
+	}
+	if (ray->direction_angle > 90 && ray->direction_angle < 270)
+	{
+		ray->is_facing_left = TRUE;
+		ray->is_facing_right = FALSE;
+	}
+	else
+	{
+		ray->is_facing_left = FALSE;
+		ray->is_facing_right = TRUE;
+	}
+}
+
+void	ray_direction_angle_correction(t_ray *ray)
+{
+	if (ray->direction_angle >= 360)
+		ray->direction_angle -= 360;
+	else if (ray->direction_angle < 0)
+		ray->direction_angle += 360;
+}
+
 /**
  * Cast rays in the player's field of view (FOV).
  */
@@ -50,31 +82,13 @@ void	raycasting(t_player player, t_map map, t_images *images)
 		printf("---------------------------\n");
 		printf("Ray number: %d\n\n", ray.x_on_screen);
 		ray.direction_angle = player.direction_angle - FOV / 2 + (double)i / SCREEN_WIDTH * FOV;
-		if (ray.direction_angle >= 360)
-			ray.direction_angle -= 360;
-		else if (ray.direction_angle < 0)
-			ray.direction_angle += 360;
-		if (ray.direction_angle > 0 && ray.direction_angle < 180)
-		{
-			ray.is_facing_up = TRUE;
-			ray.is_facing_down = FALSE;
-		}
-		else
-		{
-			ray.is_facing_up = FALSE;
-			ray.is_facing_down = TRUE;
-		}
-		if (ray.direction_angle > 90 && ray.direction_angle < 270)
-		{
-			ray.is_facing_left = TRUE;
-			ray.is_facing_right = FALSE;
-		}
-		else
-		{
-			ray.is_facing_left = FALSE;
-			ray.is_facing_right = TRUE;
-		}
+		ray_direction_angle_correction(&ray);
+		where_is_the_ray_facing(&ray);
 		ray.slope = calculate_ray_slope(ray);
+		if (ray.direction_angle == 0 || ray.direction_angle == 180 || ray.direction_angle == 360)
+			ray.slope = 0;
+		if (ray.direction_angle == 90 || ray.direction_angle == 270)
+			ray.slope = INFINITY;
 		ray.y_intercept = calculate_ray_y_intercept(ray, player);
 		// ray.distance_vertical_intersection = vertical_intersection(ray, player, map);
 		vertical_intersection(&ray, player, map);
