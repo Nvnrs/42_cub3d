@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 13:53:40 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:33:13 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,25 @@ void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg)
 	mlx_image_to_window(mlx, bg, 0, 0);
 }
 
+void	reset_wall_image(t_images *images)
+{
+	t_coord	start;
+	t_coord	end;
+
+	start.x = 0;
+	start.y = 0;
+	end.x = images->wall->width;
+	end.y = images->wall->height;
+	fill_zone(start, end, images->wall, 0x00000000);
+}
+
 int	main(void)
 {
 	t_player	player;
 	t_map		map;
 	t_images	*images;
 	mlx_t		*mlx;
+	t_data_to_key_hook data;
 	
 	mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "MLX42", true);
 	images = init_images(mlx);
@@ -142,6 +155,11 @@ int	main(void)
 	mlx_image_to_window(mlx, images->wall, 0, 0);
 	mlx_image_to_window(mlx, images->minimap,
 		SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
+	data.player = &player;
+	data.map = &map;
+	data.images = images;
+	data.mlx = mlx;
+	mlx_key_hook(mlx, &my_keyhook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);

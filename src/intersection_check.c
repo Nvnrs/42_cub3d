@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:08 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 13:56:15 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:50:58 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
  * Check if the given point in the map's grid is in a wall or not.
  * Return TRUE or FALSE.
  */
-t_bool	is_wall(float x, float y, t_map map, t_ray ray, int is_vertical_check)
+t_bool	is_wall(int x, int y, t_map map, t_ray ray, int is_vertical_check)
 {
 	int	x_in_grid;
 	int	y_in_grid;
 
-	if (is_vertical_check == 0) // intersection verticale
+	if (is_vertical_check == 1) // intersection verticale
 	{
 		if (ray.is_facing_left)
 			x_in_grid = (x - 1) / CUBE_SIZE;
@@ -53,11 +53,11 @@ t_bool	is_wall(float x, float y, t_map map, t_ray ray, int is_vertical_check)
 		|| y_in_grid < 0
 		|| map.grid[y_in_grid][x_in_grid] == '1')
 	{
-		printf("[WALL CHECK] Testing (%f, %f) -> map.grid[%d][%d] = 1\n",
+		printf("[WALL CHECK] Testing (%d, %d) -> map.grid[%d][%d] = 1\n",
        x, y, y_in_grid, x_in_grid);	
 		return (TRUE);
 	}
-	printf("[WALL CHECK] Testing (%f, %f) -> map.grid[%d][%d] = %c\n",
+	printf("[WALL CHECK] Testing (%d, %d) -> map.grid[%d][%d] = %c\n",
        x, y,  y_in_grid, x_in_grid, map.grid[y_in_grid][x_in_grid]);
 	return (FALSE);
 }
@@ -80,7 +80,7 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map)
 		x = player.x + pixel_to_first_intersection;
 	else
 		x = player.x - pixel_to_first_intersection;
-		// x = (player.x / CUBE_SIZE) * CUBE_SIZE;
+		// x = (player.x / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
 		// x = (player.x / CUBE_SIZE) * CUBE_SIZE - 1;
 	y = ray->slope * x + ray->y_intercept;
 	printf("VERTICAL_INTERSECTION FIRST x: %d\n", x);
@@ -124,7 +124,7 @@ void	horizontal_intersection(t_ray *ray, t_player player, t_map map)
 		y = player.y + pixel_to_first_intersection;
 	else
 		y = player.y - pixel_to_first_intersection;
-		// y = (player.y / CUBE_SIZE) * CUBE_SIZE;
+		// y = (player.y / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
 		// y = (player.y / CUBE_SIZE) * CUBE_SIZE - 1;
 	x = (y - ray->y_intercept) / ray->slope;
 	printf("HORIZONTAL_INTERSECTION FIRST y: %d\n", y);
