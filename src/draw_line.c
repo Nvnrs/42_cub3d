@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/09 11:27:22 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 11:10:16 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,12 @@ void	draw_wall(t_images *images, t_ray ray)
 	b.x = ray.x_on_screen;
 	a.y = (SCREEN_HEIGHT - ray.wall_height) / 2;
 	b.y = (SCREEN_HEIGHT - ray.wall_height) / 2 + ray.wall_height;
-	draw_line(images->wall, a, b, 0x0000FFFF);
+	if (ray.is_north_hit)//BLUE
+		draw_line(images->wall, a, b, 0x0000FFFF);
+	else if (ray.is_east_hit)//GREEN
+		draw_line(images->wall, a, b, 0x00FF00FF);
+	else if (ray.is_south_hit)//RED
+		draw_line(images->wall, a, b, 0xFF0000FF);
+	else if (ray.is_west_hit)//PURPLE
+		draw_line(images->wall, a, b, 0x800080FF);
 }

@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:38:29 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/09 11:41:24 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 11:13:32 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ void	draw_ray_on_minimap(t_player player, t_ray ray, t_images *images)
 	ray_end_point_relative_to_player.y = ray.y_smallest - player.y;
 	player_on_minimap.x	= images->minimap->width / 2;
 	player_on_minimap.y	= images->minimap->height / 2;
-	draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0xFFFF00FF);
+	// draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0xFFFF00FF);
+	if (ray.is_north_hit)//BLUE
+		draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0x0000FFFF);
+	else if (ray.is_east_hit)//GREEN
+		draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0x00FF00FF);
+	else if (ray.is_south_hit)//RED
+		draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0xFF0000FF);
+	else if (ray.is_west_hit)//PURPLE
+		draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0x800080FF);
 }
 
 void	draw_player_on_minimap(t_player player, t_images *images)

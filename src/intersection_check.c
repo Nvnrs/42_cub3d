@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:08 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/10 15:48:41 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 10:56:22 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,9 @@ t_bool	is_wall(int x, int y, t_map map, t_ray ray, int is_vertical_check)
 	int	x_in_grid;
 	int	y_in_grid;
 
-	if (is_vertical_check == 1) // intersection verticale
-	{
-		if (ray.is_facing_left)
-			x_in_grid = (x - 1) / CUBE_SIZE;
-		else
-			x_in_grid = x / CUBE_SIZE;
-		y_in_grid = y / CUBE_SIZE;
-	}
-	else // intersection horizontale
-	{
-		if (ray.is_facing_up)
-			y_in_grid = (y - 1) / CUBE_SIZE;
-		else
-			y_in_grid = y / CUBE_SIZE;
-		x_in_grid = x / CUBE_SIZE;
-	}
-	// (void)is_vertical_check;
-	// if (ray.is_facing_left)
-	// 	x_in_grid = (x - 1) / CUBE_SIZE;
-	// else
-	// 	x_in_grid = x / CUBE_SIZE;
-	// if (ray.is_facing_up)
-	// 	y_in_grid = (y - 1) / CUBE_SIZE;
-	// else
-	// 	y_in_grid = y / CUBE_SIZE;
-	// x_in_grid = x / CUBE_SIZE;
-	// y_in_grid = y / CUBE_SIZE;
+	(void)is_vertical_check;
+	x_in_grid = x / CUBE_SIZE;
+	y_in_grid = y / CUBE_SIZE;
 	if (x_in_grid >= map.x_max
 		|| x_in_grid < 0
 		|| y_in_grid >= map.y_max
@@ -69,47 +45,33 @@ t_bool	is_wall(int x, int y, t_map map, t_ray ray, int is_vertical_check)
  */
 void	vertical_intersection(t_ray *ray, t_player player, t_map map)
 {
-	// int	pixel_to_first_intersection;
 	int	x;
 	int	y;
-	// float	distance_between_player_and_wall;
 	float	x_step;
 	float	y_step;
-
-	// pixel_to_first_intersection = player.x % CUBE_SIZE;
-	if (fabs(ray->slope) < 0.0001)
-		ray->slope = 0.0001;
-	if (ray->is_facing_right)
-		x = (player.x / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
-	else
+	float	alpha;
+	
+	alpha = convert_degree_to_radian(fabs(player.direction_angle - ray->real_angle));//si probleme modifier ici
+	printf("alpha = %f = %f\n", alpha, fabs(player.direction_angle - ray->real_angle));
+	if (ray->is_facing_left)
 		x = (player.x / CUBE_SIZE) * CUBE_SIZE - 1;
-		// x = player.x - pixel_to_first_intersection;
-		// x = player.x + pixel_to_first_intersection;
-		// x = (player.x / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
-		// x = (player.x / CUBE_SIZE) * CUBE_SIZE - 1;
-	y = ray->slope * x + ray->y_intercept;
-	// y = x * ray->slope;
-	printf("VERTICAL_INTERSECTION FIRST x: %d\n", x);
-	printf("VERTICAL_INTERSECTION FIRST y: %d\n", y);
-	if (ray->is_facing_right)
-		x_step = CUBE_SIZE;
 	else
+		x = (player.x / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
+	y = player.x + (player.x - x) * tan (alpha);
+	if (ray->is_facing_left)
 		x_step = -CUBE_SIZE;
-	y_step = x_step * ray->slope;
+	else
+		x_step = CUBE_SIZE;
+	y_step = CUBE_SIZE * tan(alpha);
 	while (!is_wall(x, y, map, *ray, 1))
 	{
 		x += x_step;
 		y += y_step;
 	}
-	printf("VERTICAL_INTERSECTION LAST x: %d\n", x);
-	printf("VERTICAL_INTERSECTION LAST y: %d\n", y);
-	printf("x_in_grid = %d\n", x / CUBE_SIZE);
-	printf("y_in_grid = %d\n", y / CUBE_SIZE);
 	ray->x_ver = x;
 	ray->y_ver = y;
-	ray->distance_vertical_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
-	// distance_between_player_and_wall = calculate_distance_between_two_points(player.x, player.y, x, y);
-	// return (distance_between_player_and_wall);
+	// ray->distance_vertical_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
+	ray->distance_vertical_intersection = abs(player.x - x) / cos(alpha);
 }
 
 /**
@@ -118,45 +80,31 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map)
  */
 void	horizontal_intersection(t_ray *ray, t_player player, t_map map)
 {
-	// int	pixel_to_first_intersection;
 	int	x;
 	int	y;
-	// float	distance_between_player_and_wall;
 	float	y_step;
 	float	x_step;
+	float	alpha;
 
-	// pixel_to_first_intersection = player.y % CUBE_SIZE;//attention a la limite
-	if (fabs(ray->slope) < 0.0001)
-		ray->slope = 0.0001;
-	if (ray->is_facing_down)
-		y = (player.y / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
-	else
+	alpha = convert_degree_to_radian(fabs(player.direction_angle - ray->real_angle));//si probleme modifier ici
+	printf("alpha = %f = %f\n", alpha, fabs(player.direction_angle - ray->real_angle));
+	if (ray->is_facing_up)
 		y = (player.y / CUBE_SIZE) * CUBE_SIZE - 1;
-		// y = player.y + pixel_to_first_intersection;
-		// y = player.y - pixel_to_first_intersection;
-		// y = (player.y / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
-		// y = (player.y / CUBE_SIZE) * CUBE_SIZE - 1;
-	// x = (y - ray->y_intercept) / ray->slope;
-	x = y / ray->slope;//-------------------LE DERNIER CHANGEMENT--------------------------------
-	printf("HORIZONTAL_INTERSECTION FIRST y: %d\n", y);
-	printf("HORIZONTAL_INTERSECTION FIRST x: %d\n", x);
-	if (ray->is_facing_down)
-		y_step = CUBE_SIZE;
 	else
+		y = (player.y / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
+	x = player.x + (player.y - y) / tan(alpha);
+	if (ray->is_facing_up)
 		y_step = -CUBE_SIZE;
-	x_step = y_step / ray->slope;
+	else
+		y_step = CUBE_SIZE;
+	x_step = CUBE_SIZE / tan(alpha);
 	while (!is_wall(x, y, map, *ray, 0))
 	{
-		y += y_step;
 		x += x_step;
+		y += y_step;
 	}
-	printf("HORIZONTAL_INTERSECTION LAST y: %d\n", y);
-	printf("HORIZONTAL_INTERSECTION LAST x: %d\n", x);
-	printf("x_in_grid = %d\n", x / CUBE_SIZE);
-	printf("y_in_grid = %d\n", y / CUBE_SIZE);
 	ray->x_hor = x;
 	ray->y_hor = y;
-	ray->distance_horizontal_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
-	// distance_between_player_and_wall = calculate_distance_between_two_points(player.x, player.y, x, y);
-	// return (distance_between_player_and_wall);
+	// ray->distance_horizontal_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
+	ray->distance_horizontal_intersection = abs(player.x - x) / cos(alpha);
 }

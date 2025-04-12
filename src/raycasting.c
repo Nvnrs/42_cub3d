@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:13 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/10 15:41:43 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 11:09:36 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,27 @@ void	where_is_the_ray_facing(t_ray *ray)
 
 void	ray_direction_angle_correction(t_ray *ray)
 {
-	if (ray->direction_angle >= 360)
+	ray->real_angle = ray->direction_angle;
+	if (ray->direction_angle >= 360)	
 		ray->direction_angle -= 360;
 	else if (ray->direction_angle < 0)
 		ray->direction_angle += 360;
+}
+
+void	where_was_the_wall_hit(t_ray *ray)
+{
+	ray->is_north_hit = FALSE;
+	ray->is_east_hit = FALSE;
+	ray->is_south_hit = FALSE;
+	ray->is_west_hit = FALSE;
+	if (ray->is_facing_right && ray->is_vertical_smallest)
+		ray->is_west_hit = TRUE;
+	else if (ray->is_facing_left && ray->is_vertical_smallest)
+		ray->is_east_hit = TRUE;
+	else if (ray->is_facing_down && ray->is_horizontal_smallest)
+		ray->is_north_hit = TRUE;
+	else if (ray->is_facing_up && ray->is_horizontal_smallest)
+		ray->is_south_hit = TRUE;
 }
 
 /**
@@ -99,15 +116,20 @@ void	raycasting(t_player player, t_map map, t_images *images)
 			ray.smallest_distance = ray.distance_vertical_intersection;
 			ray.x_smallest = ray.x_ver;
 			ray.y_smallest = ray.y_ver;
+			ray.is_vertical_smallest = TRUE;
+			ray.is_horizontal_smallest = FALSE;
 		}
 		else
 		{
 			ray.smallest_distance = ray.distance_horizontal_intersection;
 			ray.x_smallest = ray.x_hor;
 			ray.y_smallest = ray.y_hor;
+			ray.is_vertical_smallest = FALSE;
+			ray.is_horizontal_smallest = TRUE;
 		}
+		where_was_the_wall_hit(&ray);
 		ray.fixed_distance = fix_fish_eye_effect(ray, player);
-		ray.wall_height = calculate_wall_height(ray.fixed_distance);
+		ray.wall_height = calculate_wall_height(ray.smallest_distance);
 		print_ray_info(ray);
 		printf("Player x: %d\n", player.x);
 		printf("Player y: %d\n", player.y);

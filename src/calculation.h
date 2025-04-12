@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:03 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/10 11:34:40 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 11:00:37 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ typedef struct s_ray
 	int		y_ver;
 	int		x_smallest;
 	int		y_smallest;
+	float	real_angle;
+	t_bool	is_vertical_smallest;
+	t_bool	is_horizontal_smallest;
+	t_bool	is_north_hit;
+	t_bool	is_east_hit;
+	t_bool	is_south_hit;
+	t_bool	is_west_hit;
 }	t_ray;
 
 typedef struct s_data_to_keyhook
