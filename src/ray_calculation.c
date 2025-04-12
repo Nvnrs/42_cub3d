@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:10 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/10 10:21:00 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:53:32 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ float	calculate_angle_between_each_ray(void)
 /**
  * Calculte the slope of a ray with its angle in degree.
  */
-float	calculate_ray_slope(t_ray ray)
+float	calculate_ray_slope(t_ray ray, t_player player)
 {
-	return (tan(convert_degree_to_radian(ray.direction_angle)));
+	return (tanf(convert_degree_to_radian(ray.angle_related_to_player)));
 }
 /**
  * Calculate the ray's y intercept from the ray slope and the player's position.

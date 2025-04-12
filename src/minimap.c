@@ -6,22 +6,25 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:38:29 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/12 11:13:32 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 12:24:27 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "calculation.h"
 
-void	draw_ray_on_minimap(t_player player, t_ray ray, t_images *images)
+/**
+ * Cette fonction n'est pas correcte. La position est par rapportau joueur reel.
+ */
+void	draw_ray_on_minimap(t_player player, t_ray ray, t_images *images, t_map map)
 {
 	t_coord	ray_end_point_relative_to_player;
 	t_coord	player_on_minimap;
 
-	ray_end_point_relative_to_player.x = ray.x_smallest - player.x;
-	ray_end_point_relative_to_player.y = ray.y_smallest - player.y;
 	player_on_minimap.x	= images->minimap->width / 2;
 	player_on_minimap.y	= images->minimap->height / 2;
+	ray_end_point_relative_to_player.x = ray.x_smallest - player.x;
+	ray_end_point_relative_to_player.y = ray.y_smallest - player.y;
 	// draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0xFFFF00FF);
 	if (ray.is_north_hit)//BLUE
 		draw_line(images->minimap, player_on_minimap, ray_end_point_relative_to_player, 0x0000FFFF);

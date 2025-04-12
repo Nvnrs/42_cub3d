@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 11:33:22 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/10 11:33:44 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 13:45:52 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void my_keyhook(mlx_key_data_t keydata, void* void_param)
 		mlx_image_to_window(param->mlx, param->images->minimap,
 		SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
 	}
-	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
 		param->player->y += 1;
 		draw_bg_minimap(param->images);
@@ -58,9 +58,41 @@ void my_keyhook(mlx_key_data_t keydata, void* void_param)
 		mlx_image_to_window(param->mlx, param->images->minimap,
 		SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
 	}
-	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
 		param->player->y -= 1;
+		draw_bg_minimap(param->images);
+		reset_wall_image(param->images);
+		raycasting(*param->player, *param->map, param->images);
+		draw_border_minimap(param->images);
+		draw_player_on_minimap(*param->player, param->images);
+		mlx_image_to_window(param->mlx, param->images->wall, 0, 0);
+		mlx_image_to_window(param->mlx, param->images->minimap,
+		SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
+	}
+	else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	{
+		param->player->direction_angle -= 1;
+		if (param->player->direction_angle >= 360)	
+			param->player->direction_angle -= 360;
+		else if (param->player->direction_angle < 0)
+			param->player->direction_angle += 360;
+		draw_bg_minimap(param->images);
+		reset_wall_image(param->images);
+		raycasting(*param->player, *param->map, param->images);
+		draw_border_minimap(param->images);
+		draw_player_on_minimap(*param->player, param->images);
+		mlx_image_to_window(param->mlx, param->images->wall, 0, 0);
+		mlx_image_to_window(param->mlx, param->images->minimap,
+		SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
+	}
+	else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	{
+		param->player->direction_angle += 1;
+		if (param->player->direction_angle >= 360)	
+			param->player->direction_angle -= 360;
+		else if (param->player->direction_angle < 0)
+			param->player->direction_angle += 360;
 		draw_bg_minimap(param->images);
 		reset_wall_image(param->images);
 		raycasting(*param->player, *param->map, param->images);

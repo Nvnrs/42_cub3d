@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:03 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/12 11:00:37 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 15:51:36 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_ray
 	t_bool	is_east_hit;
 	t_bool	is_south_hit;
 	t_bool	is_west_hit;
+	float	angle_related_to_player;
 }	t_ray;
 
 typedef struct s_data_to_keyhook
@@ -92,7 +93,7 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map);
 void	horizontal_intersection(t_ray *ray, t_player player, t_map map);
 
 float	calculate_angle_between_each_ray(void);
-float	calculate_ray_slope(t_ray ray);
+float	calculate_ray_slope(t_ray ray, t_player player);
 float	calculate_ray_y_intercept(t_ray ray, t_player player);
 //float	calculate_ray_direction(t_player player, t_ray ray);
 
@@ -101,7 +102,7 @@ float	calculate_wall_height(float distance_between_player_and_wall);
 void	draw_wall(t_images *images, t_ray ray);
 
 void	draw_player_on_minimap(t_player player, t_images *images);
-void	draw_ray_on_minimap(t_player player, t_ray ray, t_images *images);
+void	draw_ray_on_minimap(t_player player, t_ray ray, t_images *images, t_map map);
 void	draw_bg_minimap(t_images *images);
 void	draw_border_minimap(t_images *images);
 

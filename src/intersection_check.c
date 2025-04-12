@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 10:52:08 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/12 10:56:22 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/12 16:34:12 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,54 @@ void	vertical_intersection(t_ray *ray, t_player player, t_map map)
 	float	y_step;
 	float	alpha;
 	
-	alpha = convert_degree_to_radian(fabs(player.direction_angle - ray->real_angle));//si probleme modifier ici
-	printf("alpha = %f = %f\n", alpha, fabs(player.direction_angle - ray->real_angle));
-	if (ray->is_facing_left)
-		x = (player.x / CUBE_SIZE) * CUBE_SIZE - 1;
+	alpha = convert_degree_to_radian(fabs(player.direction_angle - ray->direction_angle));//si probleme modifier ici
+	printf("alpha = %f = %f\n", alpha, fabs(player.direction_angle - ray->direction_angle));
+	// if (ray->is_facing_left)
+	// 	x = (player.x / CUBE_SIZE) * CUBE_SIZE - 1;
+	// else
+	// 	x = (player.x / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
+	// y = player.y + (player.x - x) * tanf(alpha);
+	// if (ray->is_facing_left)
+	// 	x_step = -CUBE_SIZE;
+	// else
+	// 	x_step = CUBE_SIZE;
+	// y_step = CUBE_SIZE * tanf(alpha);
+	// printf("VERTICAL_INTERSECTION FIRST x: %d\n", x);
+	// printf("VERTICAL_INTERSECTION FIRST y: %d\n", y);
+	// while (!is_wall(x, y, map, *ray, 1))
+	// {
+	// 	x += x_step;
+	// 	y += y_step;
+	// }
+	float	t;
+	
+	if (ray->is_facing_right)
+		x = CUBE_SIZE - (player.x % CUBE_SIZE) + player.x;
 	else
-		x = (player.x / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
-	y = player.x + (player.x - x) * tan (alpha);
-	if (ray->is_facing_left)
-		x_step = -CUBE_SIZE;
-	else
+		x = player.x - (player.x % CUBE_SIZE) - 1;
+	t = (x - player.x) / cosf(convert_degree_to_radian(ray->angle_related_to_player));//not sure
+	// y = player.y + t * sinf(convert_degree_to_radian(ray->angle_related_to_player));//not sure
+	y = player.y + (player.x - x) * tanf(convert_degree_to_radian(ray->angle_related_to_player));//not sure
+	if (ray->is_facing_right)
 		x_step = CUBE_SIZE;
-	y_step = CUBE_SIZE * tan(alpha);
+	else
+		x_step = -CUBE_SIZE;
+	y_step = CUBE_SIZE * tanf(convert_degree_to_radian(ray->angle_related_to_player));
+	if (ray->is_facing_up)
+		y_step = -y_step;
+	printf("VERTICAL_INTERSECTION FIRST x: %d\n", x);
+	printf("VERTICAL_INTERSECTION FIRST y: %d\n", y);
 	while (!is_wall(x, y, map, *ray, 1))
 	{
 		x += x_step;
 		y += y_step;
 	}
+	printf("VERTICAL_INTERSECTION LAST x: %d\n", x);
+	printf("VERTICAL_INTERSECTION LAST y: %d\n", y);
 	ray->x_ver = x;
 	ray->y_ver = y;
 	// ray->distance_vertical_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
-	ray->distance_vertical_intersection = abs(player.x - x) / cos(alpha);
+	ray->distance_vertical_intersection = abs(player.x - x) / cosf(alpha);
 }
 
 /**
@@ -86,25 +113,45 @@ void	horizontal_intersection(t_ray *ray, t_player player, t_map map)
 	float	x_step;
 	float	alpha;
 
-	alpha = convert_degree_to_radian(fabs(player.direction_angle - ray->real_angle));//si probleme modifier ici
-	printf("alpha = %f = %f\n", alpha, fabs(player.direction_angle - ray->real_angle));
-	if (ray->is_facing_up)
-		y = (player.y / CUBE_SIZE) * CUBE_SIZE - 1;
+	alpha = convert_degree_to_radian(fabs(player.direction_angle - ray->direction_angle));//si probleme modifier ici
+	printf("alpha = %f = %f\n", alpha, fabs(player.direction_angle - ray->direction_angle));
+	// if (ray->is_facing_up)
+	// 	y = (player.y / CUBE_SIZE) * CUBE_SIZE - 1;
+	// else
+	// 	y = (player.y / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
+	// x = player.x + (player.y - y) / tanf(alpha);
+	// if (ray->is_facing_up)
+	// 	y_step = -CUBE_SIZE;
+	// else
+	// 	y_step = CUBE_SIZE;
+	// x_step = CUBE_SIZE / tanf(alpha);
+	float	t;
+	
+	if (ray->is_facing_down)
+		y = CUBE_SIZE - (player.y % CUBE_SIZE) + player.y;
 	else
-		y = (player.y / CUBE_SIZE) * CUBE_SIZE + CUBE_SIZE;
-	x = player.x + (player.y - y) / tan(alpha);
-	if (ray->is_facing_up)
-		y_step = -CUBE_SIZE;
-	else
+		y = player.y - (player.y % CUBE_SIZE) - 1;
+	t = (y - player.y) / sinf(convert_degree_to_radian(ray->angle_related_to_player));
+	// x = player.x + t * cosf(convert_degree_to_radian(ray->angle_related_to_player));
+	x = player.x + (player.y - y) / tanf(convert_degree_to_radian(ray->angle_related_to_player));
+	if (ray->is_facing_down)
 		y_step = CUBE_SIZE;
-	x_step = CUBE_SIZE / tan(alpha);
+	else
+		y_step = -CUBE_SIZE;
+	x_step = CUBE_SIZE / tanf(convert_degree_to_radian(ray->angle_related_to_player));
+	if (ray->is_facing_left)
+		x_step = -x_step;
+	printf("HORIZONTAL_INTERSECTION FIRST y: %d\n", y);
+	printf("HORIZONTAL_INTERSECTION FIRST x: %d\n", x);
 	while (!is_wall(x, y, map, *ray, 0))
 	{
 		x += x_step;
 		y += y_step;
 	}
+	printf("HORIZONTAL_INTERSECTION LAST y: %d\n", y);
+	printf("HORIZONTAL_INTERSECTION LAST x: %d\n", x);
 	ray->x_hor = x;
 	ray->y_hor = y;
 	// ray->distance_horizontal_intersection = calculate_distance_between_two_points(player.x, player.y, x, y);
-	ray->distance_horizontal_intersection = abs(player.x - x) / cos(alpha);
+	ray->distance_horizontal_intersection = abs(player.x - x) / cosf(alpha);
 }
