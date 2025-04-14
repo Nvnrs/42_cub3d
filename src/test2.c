@@ -198,25 +198,25 @@ char	**map_test(int x_max, int y_max)
 	return (map);
 }
 
-void	print_map(char **map, int x_max, int y_max)
-{
-	int	x;
-	int	y;
+// void	print_map(char **map, int x_max, int y_max)
+// {
+// 	int	x;
+// 	int	y;
 
-	y = 0;
-	while (y < y_max)
-	{
-		x = 0;
-		while (x < x_max)
-		{
-			printf("%c ", map[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
+// 	y = 0;
+// 	while (y < y_max)
+// 	{
+// 		x = 0;
+// 		while (x < x_max)
+// 		{
+// 			printf("%c ", map[y][x]);
+// 			x++;
+// 		}
+// 		printf("\n");
+// 		y++;
+// 	}
 	
-}
+// }
 
 /**
  * Convert degree to radian.
