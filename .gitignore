@@ -2,3 +2,4 @@ lib/
 *.o
 cub3D
 .vscode
+*.png

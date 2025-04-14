@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:13:20 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 13:34:42 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:07:55 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ void	test_direction_player(int y_player, int x_player, t_map *map, t_bool *end)
 {
 	if (*end == TRUE)
 		return;
-	if (map->grid[y_player][x_player] == 'V')
-	{
+	if (x_player >= map->x_max
+		|| y_player >= map->y_max
+		|| x_player < 0
+		|| y_player < 0
+		|| map->grid[y_player][x_player] == 'V')
+	{	
 		*end = TRUE;
 		return;
 	}
