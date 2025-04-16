@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_desc_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:19:43 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 13:47:30 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:11 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 t_bool	check_if_line_is_empty(char *file, int i_start)

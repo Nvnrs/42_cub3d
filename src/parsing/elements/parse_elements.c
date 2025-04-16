@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:43:16 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 11:02:23 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:30 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 t_key_val	**get_elements(char *file)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:14:30 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 15:17:09 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:37:16 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARSING_H
 
 # include "cub3d.h"
-# include "calculation.h"
 # define CHARSET_MAP "01NSEW"
 #define NB_ELEMENTS 6
 

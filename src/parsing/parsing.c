@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:27:25 by nicolas           #+#    #+#             */
-/*   Updated: 2025/04/14 15:15:23 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:39:25 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 t_bool	map_is_valid(int argc, char **argv)

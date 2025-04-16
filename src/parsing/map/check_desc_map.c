@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_desc_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:36:13 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 13:53:44 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:04 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 t_bool	check_if_line_is_empty_also_space(char *file, int i_start)

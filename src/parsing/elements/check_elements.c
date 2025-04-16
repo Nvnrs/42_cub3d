@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:41:09 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 17:14:48 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:26 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 #define MSG_ERR_ELEMENTS_INVALID "Elements (textures / colors) format are not valid, please make you sure :\n\

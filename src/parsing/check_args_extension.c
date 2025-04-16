@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_args_extension.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:39:07 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 10:45:50 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:12 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 t_bool	filename_contain_one_point(char *filename)

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_val.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:08:29 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 13:42:46 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:38 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
-#include "calculation.h"
 #include "parsing.h"
 
 void	print_key_val(t_key_val *key_val)

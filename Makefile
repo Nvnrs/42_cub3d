@@ -30,18 +30,19 @@ SRC_DEBUG = $(SRC_DIR_DEBUG)/map.c \
 		$(SRC_DIR_DEBUG)/key_val.c \
 
 SRC = $(SRC_DIR)/main.c \
-	$(SRC_DIR)/calculation_utils.c \
-	$(SRC_DIR)/distance_calculation.c \
-	$(SRC_DIR)/intersection_check.c \
-	$(SRC_DIR)/ray_calculation.c \
-	$(SRC_DIR)/raycasting.c \
-	$(SRC_DIR)/wall_calculation.c \
 	$(SRC_DIR)/draw_line.c \
-	$(SRC_DIR)/minimap.c \
-	$(SRC_DIR)/keyhook.c \
 	$(SRC_PARSING) \
 	$(SRC_INIT) \
 	$(SRC_DEBUG) \
+	$(SRC_DIR)/new_raycasting.c \
+	# $(SRC_DIR)/keyhook.c \
+	# $(SRC_DIR)/minimap.c \
+	# $(SRC_DIR)/calculation_utils.c \
+	# $(SRC_DIR)/distance_calculation.c \
+	# $(SRC_DIR)/intersection_check.c \
+	# $(SRC_DIR)/ray_calculation.c \
+	# $(SRC_DIR)/raycasting.c \
+	# $(SRC_DIR)/wall_calculation.c \
 
 
 ALLDIR = $(OBJ_DIR) \

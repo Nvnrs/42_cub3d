@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:28:17 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/14 10:29:27 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:22 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "calculation.h"
 
 char *get_file(char *filename)
 {
