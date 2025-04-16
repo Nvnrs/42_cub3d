@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:38:12 by pchateau         ###   ########.fr       */
+/*   Created: 2025/04/16 14:55:14 by pchateau          #+#    #+#             */
+/*   Updated: 2025/04/16 14:57:48 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color)
+void	cast(t_ray *ray, t_map map, int map_x, int map_y)
 {
-	int y;
+	ray->hit = FALSE;
 
-	y = draw_start;
-	while (y <= draw_end)
+	while (ray->hit == FALSE)
 	{
-		mlx_put_pixel(image, x, y, color);
-		y++;
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			map_x += ray->step_x;
+			ray->side = 0;//EAST WEST
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			map_y += ray->step_y;
+			ray->side = 1;//NORTH SOUTH
+		}
+		if (map.grid[map_y][map_x] != '0')
+			ray->hit = TRUE;
 	}
 }

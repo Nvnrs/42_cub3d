@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/16 14:39:06 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:52:07 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,63 +71,6 @@ t_images	*init_images(mlx_t *mlx)
 	images->wall = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	images->minimap = mlx_new_image(mlx, SCREEN_HEIGHT / 4, SCREEN_HEIGHT / 4);
 	return (images);
-}
-
-// void	free_images()
-// {
-	
-// }
-
-void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color)
-{
-	int	y;
-	int	x;
-
-	x = start.x;
-	y = start.y;
-	while (y < end.y)
-	{
-		x = start.x;
-		while (x < end.x)
-		{
-			mlx_put_pixel(image, x, y, color);
-			x++;
-		}
-		y++;
-	}	
-}
-
-void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg)
-{
-	t_coord	sky_start;
-	t_coord	sky_end;
-	t_coord	ground_start;
-	t_coord	ground_end;
-
-	// draw sky
-	sky_start.x = 0;
-	sky_start.y = 0;
-	sky_end.x = SCREEN_WIDTH;
-	sky_end.y = SCREEN_HEIGHT / 2;
-	fill_zone(sky_start, sky_end, bg, 0xFFFFFFFF);
-	ground_start.x = 0;
-	ground_start.y = SCREEN_HEIGHT / 2;
-	ground_end.x = SCREEN_WIDTH;
-	ground_end.y = SCREEN_HEIGHT;
-	fill_zone(sky_start, sky_end, bg, 0xFFFFFFAA);
-	mlx_image_to_window(mlx, bg, 0, 0);
-}
-
-void	reset_wall_image(t_images *images)
-{
-	t_coord	start;
-	t_coord	end;
-
-	start.x = 0;
-	start.y = 0;
-	end.x = images->wall->width;
-	end.y = images->wall->height;
-	fill_zone(start, end, images->wall, 0x00000000);
 }
 
 // int	main(int argc, char **argv)
@@ -199,7 +142,7 @@ void my_keyhook(mlx_key_data_t keydata, void* void_param)
 		param->player->plane_x = param->player->plane_x * cos(rot_speed) - param->player->plane_y * sin(rot_speed);
 		param->player->plane_y = old_plane_x * sin(rot_speed) + param->player->plane_y * cos(rot_speed);
 	}
-	new_raycasting(*param->player, *param->map, param->images);
+	raycasting(*param->player, *param->map, param->images);
 	// else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	// {
 		
@@ -261,7 +204,7 @@ int	main(void)
 	player.plane_y = 0.66;
 	// print_map(map.grid, 10, 10);
 	// draw_bg_minimap(images);
-	new_raycasting(player, map, images);
+	raycasting(player, map, images);
 	// draw_border_minimap(images);
 	// draw_player_on_minimap(player, images);
 	mlx_image_to_window(mlx, images->wall, 0, 0);

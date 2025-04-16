@@ -29,12 +29,19 @@ SRC_DIR_DEBUG = $(SRC_DIR)/debug
 SRC_DEBUG = $(SRC_DIR_DEBUG)/map.c \
 		$(SRC_DIR_DEBUG)/key_val.c \
 
+SRC_DIR_RAYCAST = $(SRC_DIR)/raycasting
+SRC_RAYCAST = $(SRC_DIR_RAYCAST)/set_ray_info.c \
+			$(SRC_DIR_RAYCAST)/cast.c \
+			$(SRC_DIR_RAYCAST)/wall.c
+
 SRC = $(SRC_DIR)/main.c \
-	$(SRC_DIR)/draw_line.c \
 	$(SRC_PARSING) \
 	$(SRC_INIT) \
 	$(SRC_DEBUG) \
 	$(SRC_DIR)/new_raycasting.c \
+	$(SRC_RAYCAST) \
+	$(SRC_DIR)/draw.c \
+	# $(SRC_DIR)/draw_line.c \
 	# $(SRC_DIR)/keyhook.c \
 	# $(SRC_DIR)/minimap.c \
 	# $(SRC_DIR)/calculation_utils.c \
@@ -53,6 +60,7 @@ ALLDIR = $(OBJ_DIR) \
 		$(OBJ_DIR)$(SRC_DIR_PARSING_MAP) \
 		$(OBJ_DIR)$(SRC_DIR_PARSING_FILE) \
 		$(OBJ_DIR)$(SRC_DIR_PARSING_ELEMENTS) \
+		$(OBJ_DIR)$(SRC_DIR_RAYCAST) \
 		
 OBJ_DIR = ./obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)

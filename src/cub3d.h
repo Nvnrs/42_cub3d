@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/16 14:38:55 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:51:55 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,18 @@ void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
 void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg);
 void	reset_wall_image(t_images *images);
 void	draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color);
-void	new_raycasting(t_player player, t_map map, t_images *images);
+
+
+void	raycasting(t_player player, t_map map, t_images *images);
+
+void	set_camera_x(t_ray *ray, int x);
+void	set_dir(t_ray *ray, t_player player);
+void	set_delta_dist(t_ray *ray);
+void	set_side_dist(t_ray *ray, t_player player, int map_x, int map_y);
+void	cast(t_ray *ray, t_map map, int map_x, int map_y);
+void	calculate_perpendicular_wall_dist(t_ray *ray);
+void	draw_wall(t_ray *ray, t_images *images, int x);
+
 
 void my_keyhook(mlx_key_data_t keydata, void* void_param);
 
