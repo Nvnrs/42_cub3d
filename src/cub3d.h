@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/16 15:51:55 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:09:45 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	reset_wall_image(t_images *images);
 void	draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color);
 
 
-void	raycasting(t_player player, t_map map, t_images *images);
+void	raycasting_loop(t_player player, t_map map, t_images *images);
 
 void	set_camera_x(t_ray *ray, int x);
 void	set_dir(t_ray *ray, t_player player);
@@ -119,5 +119,12 @@ void	draw_wall(t_ray *ray, t_images *images, int x);
 
 
 void my_keyhook(mlx_key_data_t keydata, void* void_param);
+
+void	walk_forward(t_data_to_key_hook *param, double move_speed);
+void	walk_backward(t_data_to_key_hook *param, double move_speed);
+void	strafe_right(t_data_to_key_hook *param, double move_speed);
+void	strafe_left(t_data_to_key_hook *param, double move_speed);
+void	turn_right(t_data_to_key_hook *param, double rot_speed);
+void	turn_left(t_data_to_key_hook *param, double rot_speed);
 
 #endif

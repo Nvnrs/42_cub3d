@@ -32,25 +32,21 @@ SRC_DEBUG = $(SRC_DIR_DEBUG)/map.c \
 SRC_DIR_RAYCAST = $(SRC_DIR)/raycasting
 SRC_RAYCAST = $(SRC_DIR_RAYCAST)/set_ray_info.c \
 			$(SRC_DIR_RAYCAST)/cast.c \
-			$(SRC_DIR_RAYCAST)/wall.c
+			$(SRC_DIR_RAYCAST)/wall.c \
+			$(SRC_DIR_RAYCAST)/raycasting_loop.c
+
+SRC_DIR_KEYHOOK = $(SRC_DIR)/keyhook
+SRC_KEYHOOK = $(SRC_DIR_KEYHOOK)/handle_key.c \
+			$(SRC_DIR_KEYHOOK)/turn.c \
+			$(SRC_DIR_KEYHOOK)/walk.c
 
 SRC = $(SRC_DIR)/main.c \
+	$(SRC_DIR)/draw.c \
 	$(SRC_PARSING) \
 	$(SRC_INIT) \
 	$(SRC_DEBUG) \
-	$(SRC_DIR)/new_raycasting.c \
 	$(SRC_RAYCAST) \
-	$(SRC_DIR)/draw.c \
-	# $(SRC_DIR)/draw_line.c \
-	# $(SRC_DIR)/keyhook.c \
-	# $(SRC_DIR)/minimap.c \
-	# $(SRC_DIR)/calculation_utils.c \
-	# $(SRC_DIR)/distance_calculation.c \
-	# $(SRC_DIR)/intersection_check.c \
-	# $(SRC_DIR)/ray_calculation.c \
-	# $(SRC_DIR)/raycasting.c \
-	# $(SRC_DIR)/wall_calculation.c \
-
+	$(SRC_KEYHOOK)
 
 ALLDIR = $(OBJ_DIR) \
 		$(OBJ_DIR)$(SRC_DIR) \
@@ -61,6 +57,7 @@ ALLDIR = $(OBJ_DIR) \
 		$(OBJ_DIR)$(SRC_DIR_PARSING_FILE) \
 		$(OBJ_DIR)$(SRC_DIR_PARSING_ELEMENTS) \
 		$(OBJ_DIR)$(SRC_DIR_RAYCAST) \
+		$(OBJ_DIR)$(SRC_DIR_KEYHOOK)
 		
 OBJ_DIR = ./obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)

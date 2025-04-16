@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_raycasting.c                                   :+:      :+:    :+:   */
+/*   raycasting_loop.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:47:09 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/16 15:51:52 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:57:06 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycasting(t_player player, t_map map, t_images *images)
+void	raycasting_loop(t_player player, t_map map, t_images *images)
 {
 	int		x;
 	t_ray	ray;
