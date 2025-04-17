@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/17 10:07:04 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:56:18 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,20 @@ typedef struct	s_images
 	mlx_image_t	*minimap;
 } t_images;
 
+typedef struct s_textures
+{
+	mlx_texture_t*	north;
+	mlx_texture_t*	south;
+	mlx_texture_t*	east;
+	mlx_texture_t*	west;
+}	t_textures;
+
 typedef	struct s_map
 {
 	char **grid;
 	int	x_max;
 	int	y_max;
+	t_textures	textures;
 }	t_map;
 
 typedef struct s_player

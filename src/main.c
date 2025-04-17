@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/17 09:54:12 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:03:29 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,22 @@ t_images	*init_images(mlx_t *mlx)
 // 	return (EXIT_SUCCESS);
 // }
 
+// void	extract_map_info(char *filename)
+// {
+// 	char *file;
+// 	char *map_desc;
+// 	t_key_val **map_elements;
+// 	t_map	*map;
+	
+// 	file = get_file(filename);
+// 	// map_elements = get_elements(file);
+// 	// map_desc = get_description_of_map(file);
+// 	// //add texture in map
+// 	// //add color for floor and ceiling in map
+// 	// map = init_map(map_desc);
+// 	free(file);
+// }
+
 int	main(void)
 {
 	t_player	player;
@@ -89,6 +105,9 @@ int	main(void)
 	t_data_to_key_hook data;
 	
 	
+	// if (!map_is_valid(argc, argv))
+	// 	return (EXIT_FAILURE);
+	// extract_map_info(argv[1]);
 	mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "MLX42", true);
 	images = init_images(mlx);
 	draw_and_put_bg(mlx, images->bg);
