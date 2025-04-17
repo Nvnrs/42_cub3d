@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/16 16:09:45 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:07:04 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
+enum	e_side
+{
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3
+};
+
+typedef enum e_side	t_side;
+
 typedef struct s_ray
 {
 	double	camera_x;
@@ -85,7 +95,7 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	t_bool	hit;
-	int		side;//enum?
+	t_side	side;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
