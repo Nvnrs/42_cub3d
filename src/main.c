@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/18 10:37:04 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:44:23 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,49 @@ t_map	*init_map2(t_key_val **map_elements, char *desc_map)
 	return (map);
 }
 
+void	set_player_info(t_player *player, t_map *map, int x, int y)
+{
+	player->x = (double)x;
+	player->y = (double)y;
+	player->dir_x = 0.0;
+	player->dir_y = 0.0;
+	if (map->grid[y][x] == 'N')
+		player->dir_y = -1.0;
+	else if (map->grid[y][x] == 'S')
+		player->dir_y = 1.0;
+	else if (map->grid[y][x] == 'W')
+		player->dir_x = -1.0;
+	else if (map->grid[y][x] == 'E')
+		player->dir_x = 1.0;
+	player->plane_x = 0.0;//valeur potentiellement incorrecte
+	player->plane_y = 0.66;//valeur potentiellement incorrecte
+}
+
+t_player	*init_player(t_map *map)
+{
+	t_player	*player;
+	int	y;
+	int	x;
+	
+	player = malloc(sizeof(t_player));
+	y = 0;
+	while (y < map->y_max)
+	{
+		x = 0;
+		while (x < map->x_max)
+		{
+			if (c_is_in_charset(map->grid[y][x], "NSEW"))
+			{
+				set_player_info(player, map, x, y);
+				break ;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (player);
+}
+
 t_map	*extract_map_info(char *filename)
 {
 	char *file;
@@ -164,6 +207,180 @@ t_map	*extract_map_info(char *filename)
 	free_tab_key_val(map_elements);
 	return (map);
 }
+
+void	print_pixels_texture(mlx_texture_t *texture)
+{
+	uint32_t	max_i;
+	uint32_t	i;
+
+	max_i = texture->width * texture->height * texture->bytes_per_pixel;
+	while (i < max_i)
+	{
+		if (i % 4 == 0)
+		{
+			print_purple();
+			printf("\n__New Pixel__\n");
+		}
+		print_reset();
+		printf("%d ", texture->pixels[i]);
+		i++;
+	}
+}
+
+void	put_pixel_texture(int x, int y, mlx_texture_t *texture, t_data_to_key_hook *data)
+{
+	uint32_t	color;
+	static	uint32_t i;
+	uint8_t		offset;
+
+	offset = x * texture->bytes_per_pixel + y * texture->height;
+	color = (texture->pixels[offset] * 16777216 + texture->pixels[offset + 1]  * 65536 + texture->pixels[offset + 2]  * 256 + texture->pixels[offset + 3]);
+	mlx_put_pixel(data->images->bg, x, y, color);
+}
+
+void	put_pixels_texture(mlx_texture_t *texture, uint32_t **tab_pixels, t_data_to_key_hook *data)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		while (x < texture->width)
+		{	
+			// mlx_put_pixel(x, y, color);
+			// put_pixel_texture(x, y, texture, data);
+			mlx_put_pixel(data->images->bg, x, y, tab_pixels[y][x]);
+			x++;
+		}
+		// put_pixel_texture(x, y, texture, data);
+		// y++;
+		y++;
+	}
+}
+
+uint32_t	**init_tab_pixels_color(mlx_texture_t *texture)
+{
+	uint32_t	**tab;
+	int			x;
+	int			y;
+
+	tab = malloc((texture->height + 1) * sizeof(uint32_t *));
+	y = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		tab[y] = malloc(texture->width * sizeof(uint32_t));
+		while (x < texture->width)
+		{
+			tab[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	tab[y] = NULL;
+	return tab;
+}
+
+void	print_tab_pixels(uint32_t **tab, mlx_texture_t *texture)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		while (x < texture->width)
+		{
+			printf("%u", tab[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}	
+}
+
+void	copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	y = 0;
+	x = 0;
+	i = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		while (x < texture->width)
+		{
+			tab[y][x] = texture->pixels[i] * 16777216 + texture->pixels[i + 1]  * 65536 + texture->pixels[i + 2]  * 256 + texture->pixels[i + 3];
+			i+= 4;
+			x++;
+		}		
+		y++;
+	}	
+}
+
+void	free_tab_pixels(uint32_t **tab)
+{
+	int	y;
+
+	y = 0;
+	while (tab[y])
+	{
+		free(tab[y]);
+		y++;
+	}
+	free(tab);
+}
+
+
+void	test_texture(t_data_to_key_hook *data)
+{
+	mlx_texture_t *texture;
+	uint32_t	**tab_pixels;
+	t_coord	start;
+	t_coord	end;
+	int x;
+
+	start.x = 0;
+	start.y = 0;
+	end.x = SCREEN_WIDTH;
+	end.y = SCREEN_HEIGHT;
+	texture = mlx_load_png("./texture.png");
+	tab_pixels = init_tab_pixels_color(texture);
+	copy_pixels_color_in_tab(tab_pixels, texture);
+	// printf("Texture pixels :%d\n", texture->pixels[64]);
+	// print_pixels_texture(texture);
+	// while (x < texture->width)
+	// {
+	// 	put_pixels_texture(x, texture, data);
+	// 	x++;
+	// }
+	put_pixels_texture(texture, tab_pixels, data);
+	// put_pixels_texture(2, texture, data);
+	// put_pixels_texture(3, texture, data);
+	// put_pixels_texture(4, texture, data);
+	// put_pixels_texture(5, texture, data);
+	// put_pixels_texture(6, texture, data);
+}
+
+
+// int	main()
+// {
+// 	uint32_t **tab_pixels;
+// 	mlx_texture_t *texture;
+
+// 	texture = mlx_load_png("./texture.png");
+// 	tab_pixels = init_tab_pixels_color(texture);
+// 	copy_pixels_color_in_tab(tab_pixels, texture);
+// 	print_tab_pixels(tab_pixels, texture);
+// 	mlx_delete_texture(texture);
+// 	free_tab_pixels(tab_pixels);
+// }
 
 int	main(int argc, char *argv[])
 {
@@ -182,6 +399,7 @@ int	main(int argc, char *argv[])
 	printf("Floor color: %u\n", map->colors.floor);
 	printf("Ceiling color: %u\n", map->colors.ceiling);
 	draw_and_put_bg(mlx, images->bg, map);
+
 	// map.grid = map_test(10, 10);
 	// map.x_max = 10;
 	// map.y_max = 10;
@@ -193,17 +411,18 @@ int	main(int argc, char *argv[])
 	player.plane_y = 0.66;
 	// print_map(map.grid, 10, 10);
 	// draw_bg_minimap(images);
-	raycasting_loop(player, *map, images);
+	// raycasting_loop(player, *map, images);
 	// draw_border_minimap(images);
 	// draw_player_on_minimap(player, images);
-	mlx_image_to_window(mlx, images->wall, 0, 0);
+	// mlx_image_to_window(mlx, images->wall, 0, 0);
 	// mlx_image_to_window(mlx, images->minimap,
 		// SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
 	data.player = &player;
 	data.map = map;
 	data.images = images;
 	data.mlx = mlx;
-	mlx_key_hook(mlx, &my_keyhook, &data);
+	test_texture(&data);
+	// mlx_key_hook(mlx, &my_keyhook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);

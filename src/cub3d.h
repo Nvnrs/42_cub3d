@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/18 10:27:04 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/18 17:40:53 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/MYLIB42/mylib42.h"
 
-# define SCREEN_WIDTH	320
-# define SCREEN_HEIGHT	200
+# define SCREEN_WIDTH	1920
+# define SCREEN_HEIGHT	1080
 # define CUBE_SIZE		64
 # define FOV 			60.0
 # define M_PI			3.14159265358979323846
@@ -115,6 +115,8 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	double	wall_x;
+	int	tex_x;
 }	t_ray;
 
 typedef struct s_data_to_keyhook
@@ -141,7 +143,11 @@ void	set_delta_dist(t_ray *ray);
 void	set_side_dist(t_ray *ray, t_player player, int map_x, int map_y);
 void	cast(t_ray *ray, t_map map, int map_x, int map_y);
 void	calculate_perpendicular_wall_dist(t_ray *ray);
-void	draw_wall(t_ray *ray, t_images *images, int x);
+void	draw_wall(t_ray *ray, t_images *images, int x, t_map map);
+
+void	find_wall_hitpoint(t_ray *ray, t_player player);
+void	find_texture_x(t_ray *ray, mlx_texture_t *texture);
+void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, mlx_texture_t *texture);
 
 
 void my_keyhook(mlx_key_data_t keydata, void* void_param);
