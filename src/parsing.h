@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:14:30 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:37:16 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:29:33 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	print_map(t_map *map);
 void	print_key_val(t_key_val *el);
 void	print_tab_key_val(t_key_val **tab);
 t_bool	map_is_valid(int argc, char **argv);
-
+int	get_x_max(char	*desc_map);
+int	get_y_max(char	*desc_map);
 
 #endif

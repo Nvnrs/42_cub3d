@@ -1,13 +1,14 @@
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./error.png
+SO ./error.png
+WE ./error.png
+EA ./error.png
 
-F 220,100,0
-C 225,30,0
+F 120,100,160
+C 225,30,255
 
-
-1
-W
-1
+11111
+10001
+10W01
+10001
+11111

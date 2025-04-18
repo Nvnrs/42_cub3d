@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/17 10:56:18 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:27:04 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,19 @@ typedef struct s_textures
 	mlx_texture_t*	west;
 }	t_textures;
 
+typedef struct s_colors
+{
+	unsigned int	floor;
+	unsigned int	ceiling;
+}	t_colors;
+
 typedef	struct s_map
 {
 	char **grid;
 	int	x_max;
 	int	y_max;
 	t_textures	textures;
+	t_colors	colors;
 }	t_map;
 
 typedef struct s_player
@@ -121,7 +128,7 @@ typedef struct s_data_to_keyhook
 t_images	*init_images(mlx_t *mlx);
 
 void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
-void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg);
+void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map);
 void	reset_wall_image(t_images *images);
 void	draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color);
 

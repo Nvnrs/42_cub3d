@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:46:36 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:38:51 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color)
 	}	
 }
 
-void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg)
+void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map)
 {
 	t_coord	sky_start;
 	t_coord	sky_end;
@@ -43,12 +43,12 @@ void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg)
 	sky_start.y = 0;
 	sky_end.x = SCREEN_WIDTH;
 	sky_end.y = SCREEN_HEIGHT / 2;
-	fill_zone(sky_start, sky_end, bg, 0xFFFFFFFF);
+	fill_zone(sky_start, sky_end, bg, map->colors.ceiling);
 	ground_start.x = 0;
 	ground_start.y = SCREEN_HEIGHT / 2;
 	ground_end.x = SCREEN_WIDTH;
 	ground_end.y = SCREEN_HEIGHT;
-	fill_zone(sky_start, sky_end, bg, 0xFFFFFFAA);
+	fill_zone(ground_start, ground_end, bg, map->colors.floor);
 	mlx_image_to_window(mlx, bg, 0, 0);
 }
 

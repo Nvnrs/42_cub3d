@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:05:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/17 10:59:34 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:09:29 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	**init_tab_str(int row_max, int col_max, char c_fill)
 	tab[row] = NULL;
 	return (tab);
 }
-
 
 t_map	*init_map(char	*desc_map)
 {
