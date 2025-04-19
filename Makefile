@@ -31,7 +31,6 @@ SRC_INIT = $(SRC_DIR_INIT)/map.c \
 	
 SRC_DIR_DEBUG = $(SRC_DIR)/debug
 SRC_DEBUG = $(SRC_DIR_DEBUG)/map.c \
-		$(SRC_DIR_DEBUG)/key_val.c \
 		$(SRC_DIR_DEBUG)/pixels_texture.c \
 
 SRC_DIR_RAYCAST = $(SRC_DIR)/raycasting
@@ -68,8 +67,8 @@ OBJ_DIR = ./obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 CC = cc
 MLX_FLAGS = -ldl -lglfw -pthread -lm
-CFLAGS += -g -Isrc -Ilib/MLX42/include/MLX42
-# CFLAGS += -Wall -Wextra -Werror -g -Isrc -Ilib/MLX42/include/MLX42
+# CFLAGS += -g -Isrc -Ilib/MLX42/include/MLX42
+CFLAGS += -Wall -Wextra -Werror -g -Isrc -Ilib/MLX42/include/MLX42
 NAME = cub3D
 
 LIB_DIR = ./lib

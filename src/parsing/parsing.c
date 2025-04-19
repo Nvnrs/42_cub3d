@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:27:25 by nicolas           #+#    #+#             */
-/*   Updated: 2025/04/19 15:26:49 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:01:22 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 t_bool	map_is_valid(int argc, char **argv)
 {
 	char		*file;
-	t_key_val	**elements;
 	
 	// basics_checks
 	if (!check_args_and_extension(argc, argv))

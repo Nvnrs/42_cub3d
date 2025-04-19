@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:52:02 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 15:31:11 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:59:25 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * Takes a string like: 255,0,255.
  * Convert it like: 0xFF00FFFF but in decimal -> 4278255615.
  */
-static unsigned int	convert_rgb_to_rgba(char *rgb)
+static unsigned int	convert_rgb_to_rgba(char *rgb, char a)
 {
 	char	**rgb_split;
 	unsigned int		r;
@@ -30,22 +30,29 @@ static unsigned int	convert_rgb_to_rgba(char *rgb)
 	g = ft_atoi(rgb_split[1]);
 	b = ft_atoi(rgb_split[2]);
 	free_tab_str(rgb_split);
-	return (r * 16777216 + g * 65536 + b * 256 + 255);
+	return (r * 16777216 + g * 65536 + b * 256 + a);
 }
 
 static void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 {
 	int	i;
+	char	*floor_str;
+	char	*ceiling_str;
 
 	i = 0;
 	while (map_elements[i])
 	{
 		if (ft_strcmp(map_elements[i]->key, "F") == 0)
-			map->colors.floor = convert_rgb_to_rgba(map_elements[i]->val);
+			floor_str = map_elements[i]->val;
 		else if (ft_strcmp(map_elements[i]->key, "C") == 0)
-			map->colors.ceiling = convert_rgb_to_rgba(map_elements[i]->val);
+			ceiling_str = map_elements[i]->val;
 		i++;
 	}
+	if (ft_strcmp(floor_str, ceiling_str) == 0)
+		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, (char)127);
+	else
+		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, (char)255);
+	map->colors.floor = convert_rgb_to_rgba(floor_str, (char)255);
 }
 
 static void	extract_info_from_texture(t_texture *texture_in_map, mlx_texture_t *texture)

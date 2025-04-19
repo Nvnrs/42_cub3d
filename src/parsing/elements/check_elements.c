@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:41:09 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/18 12:12:07 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:00:53 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ t_bool	elements_are_valid(char *file)
 			free_tab_key_val(elements);
 			return (FALSE);
 		}
-		// if (is_texture(elements[i]->key) && !try_to_load_texture(elements[i]->val))
-		// {
-		// 	print_error_details("The Texture is not supported.\n", elements[i]->val);
-		// 	free_tab_key_val(elements);
-		// 	return (FALSE);
-		// }
+		if (is_texture(elements[i]->key) && !try_to_load_texture(elements[i]->val))
+		{
+			print_error_details("The Texture is not supported.\n", elements[i]->val);
+			free_tab_key_val(elements);
+			return (FALSE);
+		}
 		if (is_color(elements[i]->key) && !color_is_rgb(elements[i]->val))
 		{
 			print_error_details(MSG_ERR_COLOR, elements[i]->val);

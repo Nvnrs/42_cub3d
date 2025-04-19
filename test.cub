@@ -5,7 +5,7 @@ WE ./textures/error.png
 EA ./textures/error.png
 
 F 79,32,15
-C 4,3,72
+C 79,32,15
 
 111111111
 100000001

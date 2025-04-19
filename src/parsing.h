@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:14:30 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 15:39:57 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:02:20 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	copy_desc_map_in_grid(t_map *map, char *desc_map);
 t_bool	map_have_one_player(char *desc_map);
 t_bool	player_enclosed_by_wall(t_map *map);
 void	print_map(t_map *map);
-void	print_key_val(t_key_val *el);
-void	print_tab_key_val(t_key_val **tab);
 t_bool	map_is_valid(int argc, char **argv);
 int	get_x_max(char	*desc_map);
 int	get_y_max(char	*desc_map);
