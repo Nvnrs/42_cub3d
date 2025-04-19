@@ -6,14 +6,15 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 15:39:54 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:16:39 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-void	free_all_and_terminate(mlx_t *mlx, t_player *player, t_map *map, t_images *images)
+void	free_all_and_terminate(mlx_t *mlx, t_player *player,
+	t_map *map, t_images *images)
 {
 	free_images(mlx, images);
 	free_map(map);
@@ -23,12 +24,12 @@ void	free_all_and_terminate(mlx_t *mlx, t_player *player, t_map *map, t_images *
 
 int	main(int argc, char *argv[])
 {
-	t_player	*player;
-	t_map		*map;
-	t_images	*images;
-	mlx_t		*mlx;
-	t_data_to_key_hook data;
-	
+	t_player			*player;
+	t_map				*map;
+	t_images			*images;
+	mlx_t				*mlx;
+	t_data_to_key_hook	data;
+
 	if (!map_is_valid(argc, argv))
 		return (EXIT_FAILURE);
 	map = init_map(argv[1]);
