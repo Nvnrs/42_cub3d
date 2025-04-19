@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:43:02 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 10:54:02 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:29:12 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	find_wall_hitpoint(t_ray *ray, t_player player)
 	else
 		ray->wall_x = player.x + ray->perp_wall_dist * ray->dir_x;
 	ray->wall_x -= floor(ray->wall_x);
-	printf("wall_x: %f\n", ray->wall_x);
+	// printf("wall_x: %f\n", ray->wall_x);
 }
 
 void	find_texture_x(t_ray *ray, t_map map)
@@ -35,30 +35,9 @@ void	find_texture_x(t_ray *ray, t_map map)
 	else if (ray->side == WEST)
 		texture = map.textures.west;
 	ray->tex_x = ray->wall_x * texture.width;
-	if (ray->side == EAST || ray->side == SOUTH)//faire attention ici
-		ray->tex_x = texture.width - ray->tex_x - 1;
-	printf("tex_x: %d\n", ray->tex_x);
-}
-
-void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture texture)
-{
-	double	step;
-	double	tex_pos;
-	int		y;
-	int		tex_y;
-	uint32_t	color;
-
-	step = 1.0 * texture.height / ray->line_height;
-	tex_pos = (ray->draw_start - SCREEN_HEIGHT / 2 + ray->line_height / 2) * step;
-	y = ray->draw_start;
-	while (y < ray->draw_end)
-	{
-		tex_y = (int)tex_pos & (texture.height - 1);
-		tex_pos += step;
-		color = texture.pixels[tex_y][ray->tex_x];//il faut transformer le contenu de pixels
-		mlx_put_pixel(image, x, y, color);
-		y++;
-	}
+	// if (ray->side == EAST || ray->side == SOUTH)//faire attention ici//utile ?
+	// 	ray->tex_x = texture.width - ray->tex_x - 1;
+	// printf("tex_x: %d\n", ray->tex_x);
 }
 
 void	calculate_perpendicular_wall_dist(t_ray *ray)

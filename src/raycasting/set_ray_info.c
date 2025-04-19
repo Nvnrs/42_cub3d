@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:48:12 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/16 15:51:08 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:46:17 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	set_camera_x(t_ray *ray, int x)
 {
 	ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+	// printf("camera_x: %d\n", ray->camera_x);
 }
 
 void	set_dir(t_ray *ray, t_player player)

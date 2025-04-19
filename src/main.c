@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 10:43:12 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:24:06 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ unsigned int	convert_rgb_to_rgba(char *rgb)
 	return (r * 16777216 + g * 65536 + b * 256 + 255);
 }
 
-void	init_color_in_map(t_map *map, t_key_val **map_elements)
+void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 {
 	int	i;
 
@@ -179,9 +179,9 @@ void	extract_info_from_texture(t_texture *texture_in_map, mlx_texture_t *texture
 	texture_in_map->pixels = init_tab_pixels_color(texture);
 	copy_pixels_color_in_tab(texture_in_map->pixels, texture);
 	mlx_delete_texture(texture);
-}
+} 
 
-void	load_texture_in_map(t_map *map, t_key_val **map_elements)
+void	init_textures_in_map(t_map *map, t_key_val **map_elements)
 {
 	int	i;
 	mlx_texture_t	*texture;
@@ -221,9 +221,9 @@ t_map	*init_map2(t_key_val **map_elements, char *desc_map)
 	// print_tab(map->grid);
 	copy_desc_map_in_grid(map, desc_map);//peut etre strdup desc_map
 	// print_map(map);
-	load_texture_in_map(map, map_elements);
+	init_textures_in_map(map, map_elements);
 	// format_textures_pixels(map);
-	init_color_in_map(map, map_elements);
+	init_floor_and_ceiling_in_map(map, map_elements);
 	return (map);
 }
 
@@ -233,16 +233,28 @@ void	set_player_info(t_player *player, t_map *map, int x, int y)
 	player->y = (double)y;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
+	player->plane_x = 0.0;
+	player->plane_y = 0.0;
 	if (map->grid[y][x] == 'N')
+	{
 		player->dir_y = -1.0;
+		player->plane_x = 0.66;
+	}
 	else if (map->grid[y][x] == 'S')
+	{
 		player->dir_y = 1.0;
+		player->plane_x = -0.66;
+	}
 	else if (map->grid[y][x] == 'W')
+	{
 		player->dir_x = -1.0;
+		player->plane_y = 0.66;
+	}
 	else if (map->grid[y][x] == 'E')
+	{
 		player->dir_x = 1.0;
-	player->plane_x = 0.0;//valeur potentiellement incorrecte
-	player->plane_y = 0.66;//valeur potentiellement incorrecte
+		player->plane_y = -0.66;
+	}
 }
 
 t_player	*init_player(t_map *map)
@@ -417,6 +429,7 @@ void	test_texture(t_data_to_key_hook *data)
 
 int	main(int argc, char *argv[])
 {
+	// t_player	*player;
 	t_player	player;
 	t_map		*map;
 	t_images	*images;
@@ -432,7 +445,7 @@ int	main(int argc, char *argv[])
 	printf("Floor color: %u\n", map->colors.floor);
 	printf("Ceiling color: %u\n", map->colors.ceiling);
 	draw_and_put_bg(mlx, images->bg, map);
-
+	// player = init_player(map);
 	// map.grid = map_test(10, 10);
 	// map.x_max = 10;
 	// map.y_max = 10;
