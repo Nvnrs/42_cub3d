@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:05:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/17 11:09:29 by pchateau         ###   ########.fr       */
+/*   Created: 2025/04/19 14:52:02 by nveneros          #+#    #+#             */
+/*   Updated: 2025/04/19 15:31:11 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,95 +14,109 @@
 #include "parsing.h"
 
 
-int	get_y_max(char	*desc_map)
+/**
+ * Takes a string like: 255,0,255.
+ * Convert it like: 0xFF00FFFF but in decimal -> 4278255615.
+ */
+static unsigned int	convert_rgb_to_rgba(char *rgb)
 {
-	int	y_count;
+	char	**rgb_split;
+	unsigned int		r;
+	unsigned int		g;
+	unsigned int		b;
+	
+	rgb_split = ft_split(rgb, ',');
+	r = ft_atoi(rgb_split[0]);
+	g = ft_atoi(rgb_split[1]);
+	b = ft_atoi(rgb_split[2]);
+	free_tab_str(rgb_split);
+	return (r * 16777216 + g * 65536 + b * 256 + 255);
+}
+
+static void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
+{
 	int	i;
 
-	y_count = 0;
 	i = 0;
-	while (desc_map[i])
+	while (map_elements[i])
 	{
-		if (desc_map[i] == '\n')
-			y_count++;
-		if (desc_map[i + 1] == '\0')
-			y_count++;
+		if (ft_strcmp(map_elements[i]->key, "F") == 0)
+			map->colors.floor = convert_rgb_to_rgba(map_elements[i]->val);
+		else if (ft_strcmp(map_elements[i]->key, "C") == 0)
+			map->colors.ceiling = convert_rgb_to_rgba(map_elements[i]->val);
 		i++;
 	}
-	return (y_count);
 }
 
-int	get_x_max(char	*desc_map)
+static void	extract_info_from_texture(t_texture *texture_in_map, mlx_texture_t *texture)
 {
-	int	best_x;
-	int	curr_x;
+	texture_in_map->width = texture->width;
+	texture_in_map->height = texture->height;
+	texture_in_map->bytes_per_pixel = texture->bytes_per_pixel;
+	texture_in_map->pixels = init_tab_pixels_color(texture);
+	copy_pixels_color_in_tab(texture_in_map->pixels, texture);
+	mlx_delete_texture(texture);
+} 
+
+static void	init_textures_in_map(t_map *map, t_key_val **map_elements)
+{
 	int	i;
+	mlx_texture_t	*texture;
 
-	best_x = 0;
-	curr_x = 0;
 	i = 0;
-	while (desc_map[i])
+	while (map_elements[i])
 	{
-		if (desc_map[i] == '\n')
-		{
-			if (curr_x > best_x)
-				best_x = curr_x;
-			curr_x = 0;
-		}
-		else
-			curr_x++;
-		if (desc_map[i + 1] == '\0')
-		{
-			if (curr_x > best_x)
-				best_x = curr_x;
-			curr_x = 0;
-		}
+		if (ft_strcmp(map_elements[i]->key, "NO") == 0
+			|| ft_strcmp(map_elements[i]->key, "SO") == 0
+			||	ft_strcmp(map_elements[i]->key, "WE") == 0
+			|| ft_strcmp(map_elements[i]->key, "EA") == 0)
+			texture = mlx_load_png(map_elements[i]->val);
+		if (ft_strcmp(map_elements[i]->key, "NO") == 0)
+			extract_info_from_texture(&map->textures.north, texture);
+		else if (ft_strcmp(map_elements[i]->key, "SO") == 0)
+			extract_info_from_texture(&map->textures.south, texture);
+		else if (ft_strcmp(map_elements[i]->key, "WE") == 0)
+			extract_info_from_texture(&map->textures.west, texture);
+		else if (ft_strcmp(map_elements[i]->key, "EA") == 0)
+			extract_info_from_texture(&map->textures.east, texture);
+			// map->textures.north = mlx_load_png(map_elements[i]->val);
+			// map->textures.south = mlx_load_png(map_elements[i]->val);
+			// map->textures.west = mlx_load_png(map_elements[i]->val);
+			// map->textures.east = mlx_load_png(map_elements[i]->val);
 		i++;
 	}
-	return (best_x);
 }
 
-
-char	**init_tab_str(int row_max, int col_max, char c_fill)
+t_map	*init_map(char *filename)
 {
-	int	col;	
-	int	row;
-	char **tab;
-
-	row = 0;
-	tab = malloc((row_max + 1) * sizeof(char *));
-	while (row < row_max)
-	{
-		col = 0;
-		tab[row] = malloc((col_max + 1) * sizeof(char));
-		while (col < col_max)
-		{
-			tab[row][col] = c_fill;
-			col++;
-		}
-		tab[row][col] = '\0';
-		row++;
-	}
-	tab[row] = NULL;
-	return (tab);
-}
-
-t_map	*init_map(char	*desc_map)
-{
+	char *file;
+	char *desc_map;
+	t_key_val **map_elements;
 	t_map	*map;
-
+	
+	file = get_file(filename);
+	map_elements = get_elements(file);
+	desc_map = get_description_of_map(file);
 	map = malloc(sizeof(t_map));
 	map->x_max = get_x_max(desc_map);
 	map->y_max = get_y_max(desc_map);
 	map->grid = init_tab_str(map->y_max, map->x_max, 'V');
-	// print_tab(map->grid);
 	copy_desc_map_in_grid(map, desc_map);
-	print_map(map);
+	init_textures_in_map(map, map_elements);
+	init_floor_and_ceiling_in_map(map, map_elements);
+	free(desc_map);
+	free(file);
+	free_tab_key_val(map_elements);
 	return (map);
 }
 
+
 void	free_map(t_map *map)
 {
+	free_tab_pixels(map->textures.north.pixels);
+	free_tab_pixels(map->textures.south.pixels);
+	free_tab_pixels(map->textures.east.pixels);
+	free_tab_pixels(map->textures.west.pixels);
 	free_tab_str(map->grid);
 	free(map);
 }

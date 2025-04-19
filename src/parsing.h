@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:14:30 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/18 10:29:33 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:28:24 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	fill_tab_null(void	**tab, int size);
 void	print_tab(char **tab);
 t_key_val	*init_key_val(char *key, char *val);
 void	free_tab_key_val(t_key_val **tab);
-t_map	*init_map(char	*desc_map);
-void	free_map(t_map *map);
+t_map	*init_map_parsing(char	*desc_map);
+void	free_map_parsing(t_map *map);
 t_bool	check_if_line_is_empty(char *file, int i_start);
 int	skip_line(char *file, int i_start);
 int	skip_next_line_after_empty(char *file, int i_start);
@@ -53,7 +53,6 @@ char	*get_description_of_map(char *file);
 void	copy_desc_map_in_grid(t_map *map, char *desc_map);
 t_bool	map_have_one_player(char *desc_map);
 t_bool	player_enclosed_by_wall(t_map *map);
-void	free_map(t_map *map);
 void	print_map(t_map *map);
 void	print_key_val(t_key_val *el);
 void	print_tab_key_val(t_key_val **tab);

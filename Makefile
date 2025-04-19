@@ -13,6 +13,7 @@ SRC_PARSING = $(SRC_DIR_PARSING)/parsing.c \
 			$(SRC_DIR_PARSING_MAP)/check_desc_map.c \
 			$(SRC_DIR_PARSING_MAP)/check_player.c \
 			$(SRC_DIR_PARSING_MAP)/check_walls.c \
+			$(SRC_DIR_PARSING_MAP)/map.c \
 			$(SRC_DIR_PARSING_MAP)/parse_desc_map.c \
 			$(SRC_DIR_PARSING_FILE)/check_file.c \
 			$(SRC_DIR_PARSING_FILE)/parse_file.c \
@@ -24,10 +25,14 @@ SRC_PARSING = $(SRC_DIR_PARSING)/parsing.c \
 SRC_DIR_INIT = $(SRC_DIR)/init
 SRC_INIT = $(SRC_DIR_INIT)/map.c \
 		$(SRC_DIR_INIT)/key_val.c \
+		$(SRC_DIR_INIT)/images.c \
+		$(SRC_DIR_INIT)/pixels_texture.c \
+		$(SRC_DIR_INIT)/player.c \
 	
 SRC_DIR_DEBUG = $(SRC_DIR)/debug
 SRC_DEBUG = $(SRC_DIR_DEBUG)/map.c \
 		$(SRC_DIR_DEBUG)/key_val.c \
+		$(SRC_DIR_DEBUG)/pixels_texture.c \
 
 SRC_DIR_RAYCAST = $(SRC_DIR)/raycasting
 SRC_RAYCAST = $(SRC_DIR_RAYCAST)/set_ray_info.c \

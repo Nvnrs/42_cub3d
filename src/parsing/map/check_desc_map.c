@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_desc_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:36:13 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:40:04 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:29:29 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_bool	description_of_map_is_valid(char *file)
 	// print_yellow();
 	// printf("desc :\n%s\n", description_of_map);
 	// print_reset();
+	
 	if (description_map_contain_empty_line(description_of_map))
 		return (free(description_of_map), FALSE);
 	if (linebreak_at_last_line(description_of_map))
@@ -79,10 +80,10 @@ t_bool	description_of_map_is_valid(char *file)
 	return (free(description_of_map), FALSE);
 	if (!map_have_one_player(description_of_map))
 		return (free(description_of_map), FALSE);
-	map = init_map(description_of_map);
+	map = init_map_parsing(description_of_map);
 	free(description_of_map);
 	if (!player_enclosed_by_wall(map))
-		return (free_map(map), FALSE);
-	free_map(map);
+		return (free_map_parsing(map), FALSE);
+	free_map_parsing(map);
 	return (TRUE);
 }

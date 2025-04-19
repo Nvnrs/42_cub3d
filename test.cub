@@ -1,8 +1,8 @@
 
-NO ./stone.png
-SO ./error.png
-WE ./error.png
-EA ./error.png
+NO ./textures/stone.png
+SO ./textures/error.png
+WE ./textures/error.png
+EA ./textures/error.png
 
 F 79,32,15
 C 4,3,72

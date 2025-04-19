@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 12:04:05 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:07:05 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct	s_images
 {
 	mlx_image_t *bg;
 	mlx_image_t *wall;
-	mlx_image_t	*minimap;
 } t_images;
 
 typedef struct s_texture
@@ -65,14 +64,6 @@ typedef struct s_texture
 
 typedef struct s_textures
 {
-	// mlx_texture_t*	north;
-	// uint32_t	**north_pixels;
-	// mlx_texture_t*	south;
-	// uint32_t	**south_pixels;
-	// mlx_texture_t*	east;
-	// uint32_t	**east_pixels;
-	// mlx_texture_t*	west;
-	// uint32_t	**west_pixels;
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -143,36 +134,43 @@ typedef struct s_data_to_keyhook
 	mlx_t		*mlx;
 }	t_data_to_key_hook;
 
+// INIT
 t_images	*init_images(mlx_t *mlx);
+t_map		*init_map(char *filename);
+t_player	*init_player(t_map *map);
+void		free_map(t_map *map);
+void		free_images(mlx_t *mlx, t_images *images);
 
-void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
-void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map);
-void	reset_wall_image(t_images *images);
-void	draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color);
-
-
-void	raycasting_loop(t_player player, t_map map, t_images *images);
-
-void	set_camera_x(t_ray *ray, int x);
-void	set_dir(t_ray *ray, t_player player);
-void	set_delta_dist(t_ray *ray);
-void	set_side_dist(t_ray *ray, t_player player, int map_x, int map_y);
-void	cast(t_ray *ray, t_map map, int map_x, int map_y);
-void	calculate_perpendicular_wall_dist(t_ray *ray);
-void	draw_wall(t_ray *ray, t_images *images, int x, t_map map);
-
-void	find_wall_hitpoint(t_ray *ray, t_player player);
-void	find_texture_x(t_ray *ray, t_map map);
-void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture texture);
-
-
-void my_keyhook(mlx_key_data_t keydata, void* void_param);
-
-void	walk_forward(t_data_to_key_hook *param, double move_speed);
-void	walk_backward(t_data_to_key_hook *param, double move_speed);
-void	strafe_right(t_data_to_key_hook *param, double move_speed);
-void	strafe_left(t_data_to_key_hook *param, double move_speed);
-void	turn_right(t_data_to_key_hook *param, double rot_speed);
-void	turn_left(t_data_to_key_hook *param, double rot_speed);
+// DRAW
+void		fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
+void		draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map);
+void		reset_wall_image(t_images *images);
+void		draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color);
+void		draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture texture);
+// PIXELS
+uint32_t	**init_tab_pixels_color(mlx_texture_t *texture);
+void		copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture);
+void		free_tab_pixels(uint32_t **tab);
+void		print_pixels_texture(mlx_texture_t *texture);
+void		print_tab_pixels(uint32_t **tab, mlx_texture_t *texture);
+// RAYCASTING
+void		raycasting_loop(t_player player, t_map map, t_images *images);
+void		set_camera_x(t_ray *ray, int x);
+void		set_dir(t_ray *ray, t_player player);
+void		set_delta_dist(t_ray *ray);
+void		set_side_dist(t_ray *ray, t_player player, int map_x, int map_y);
+void		cast(t_ray *ray, t_map map, int map_x, int map_y);
+void		calculate_perpendicular_wall_dist(t_ray *ray);
+void		draw_wall(t_ray *ray, t_images *images, int x, t_map map);
+void		find_wall_hitpoint(t_ray *ray, t_player player);
+void		find_texture_x(t_ray *ray, t_map map);
+// KEYHOOK
+void 		my_keyhook(mlx_key_data_t keydata, void* void_param);
+void		walk_forward(t_data_to_key_hook *param, double move_speed);
+void		walk_backward(t_data_to_key_hook *param, double move_speed);
+void		strafe_right(t_data_to_key_hook *param, double move_speed);
+void		strafe_left(t_data_to_key_hook *param, double move_speed);
+void		turn_right(t_data_to_key_hook *param, double rot_speed);
+void		turn_left(t_data_to_key_hook *param, double rot_speed);
 
 #endif
