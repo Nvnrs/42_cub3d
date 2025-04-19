@@ -6,10 +6,9 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:38:34 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 15:26:05 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:13:27 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 #include "parsing.h"
@@ -34,7 +33,7 @@ uint32_t	**init_tab_pixels_color(mlx_texture_t *texture)
 		y++;
 	}
 	tab[y] = NULL;
-	return tab;
+	return (tab);
 }
 
 void	copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture)
@@ -51,12 +50,14 @@ void	copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture)
 		x = 0;
 		while (x < texture->width)
 		{
-			tab[y][x] = texture->pixels[i] * 16777216 + texture->pixels[i + 1]  * 65536 + texture->pixels[i + 2]  * 256 + texture->pixels[i + 3];
-			i+= 4;
+			tab[y][x] = texture->pixels[i] * 16777216
+				+ texture->pixels[i + 1] * 65536
+				+ texture->pixels[i + 2] * 256 + texture->pixels[i + 3];
+			i += 4;
 			x++;
 		}
 		y++;
-	}	
+	}
 }
 
 void	free_tab_pixels(uint32_t **tab)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:13:20 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:40:09 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:05:49 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,24 @@ t_coord	*get_position_player_in_grid(t_map *map)
 	return (NULL);
 }
 
-
-void	test_direction_player(int y_player, int x_player, t_map *map, t_bool *end)
+void	test_direction_player(int y_player, int x_player,
+	t_map *map, t_bool *end)
 {
 	if (*end == TRUE)
-		return;
+		return ;
 	if (x_player >= map->x_max
 		|| y_player >= map->y_max
 		|| x_player < 0
 		|| y_player < 0
 		|| map->grid[y_player][x_player] == 'V')
-	{	
+	{
 		*end = TRUE;
-		return;
+		return ;
 	}
-	if (map->grid[y_player][x_player]  == '1'
-	|| map->grid[y_player][x_player]  == 'X')
-		return;
+	if (map->grid[y_player][x_player] == '1'
+		|| map->grid[y_player][x_player] == 'X')
+		return ;
 	map->grid[y_player][x_player] = 'X';
-	// print_map(map);
 	test_direction_player(y_player + 1, x_player, map, end);
 	test_direction_player(y_player - 1, x_player, map, end);
 	test_direction_player(y_player, x_player + 1, map, end);
@@ -73,10 +72,6 @@ t_bool	player_enclosed_by_wall(t_map *map)
 	player_in_grid = get_position_player_in_grid(map);
 	if (player_in_grid == NULL)
 		return (FALSE);
-	print_blue();
-	printf("Player X:%d\n", player_in_grid->x);
-	printf("Player Y:%d\n", player_in_grid->y);
-	print_reset();
 	test_direction_player(player_in_grid->y, player_in_grid->x, map, &end);
 	free(player_in_grid);
 	if (end == TRUE)

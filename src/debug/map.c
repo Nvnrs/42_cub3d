@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:08:32 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:40:40 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:10:39 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
+
+static void	print_infos_map(t_map *map)
+{
+	print_purple();
+	printf("____MAP____\n");
+	print_reset();
+	printf("y_max : %d\n", map->y_max);
+	printf("x_max : %d\n", map->x_max);
+}
 
 void	print_map(t_map *map)
 {
@@ -19,11 +28,7 @@ void	print_map(t_map *map)
 	int	y;
 
 	y = 0;
-	print_purple();
-	printf("____MAP____\n");
-	print_reset();
-	printf("y_max : %d\n", map->y_max);
-	printf("x_max : %d\n", map->x_max);
+	print_infos_map(map);
 	while (map->grid[y])
 	{
 		x = 0;

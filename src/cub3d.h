@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 15:40:15 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:20:48 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ t_player	*init_player(t_map *map);
 void		free_map(t_map *map);
 void		free_images(mlx_t *mlx, t_images *images);
 void		free_all_and_terminate(mlx_t *mlx, t_player *player, t_map *map, t_images *images);
+void		init_textures_in_map(t_map *map, t_key_val **map_elements);
+void		init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements);
 // DRAW
 void		fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
 void		draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map);

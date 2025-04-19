@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:41:09 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 16:00:53 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:48:01 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,29 @@ t_bool	key_is_valid(char *key)
 	return (FALSE);
 }
 
+t_bool	element_is_valid(t_key_val *element)
+{
+	if (!key_is_valid(element->key))
+	{
+		print_error_details(MSG_ERR_KEYS, element->key);
+		return (FALSE);
+	}
+	if (is_texture(element->key) && !try_to_load_texture(element->val))
+	{
+		print_error_details("The Texture is not supported.\n", element->val);
+		return (FALSE);
+	}
+	if (is_color(element->key) && !color_is_rgb(element->val))
+	{
+		print_error_details(MSG_ERR_COLOR, element->val);
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
 t_bool	elements_are_valid(char *file)
 {
-	int	i;
+	int			i;
 	t_key_val	**elements;
 
 	i = 0;
@@ -42,21 +62,8 @@ t_bool	elements_are_valid(char *file)
 		return (print_error(MSG_ERR_ELEMENTS_INVALID));
 	while (elements[i])
 	{
-		if (!key_is_valid(elements[i]->key))
+		if (!element_is_valid(elements[i]))
 		{
-			print_error_details(MSG_ERR_KEYS, elements[i]->key);
-			free_tab_key_val(elements);
-			return (FALSE);
-		}
-		if (is_texture(elements[i]->key) && !try_to_load_texture(elements[i]->val))
-		{
-			print_error_details("The Texture is not supported.\n", elements[i]->val);
-			free_tab_key_val(elements);
-			return (FALSE);
-		}
-		if (is_color(elements[i]->key) && !color_is_rgb(elements[i]->val))
-		{
-			print_error_details(MSG_ERR_COLOR, elements[i]->val);
 			free_tab_key_val(elements);
 			return (FALSE);
 		}
@@ -65,4 +72,3 @@ t_bool	elements_are_valid(char *file)
 	free_tab_key_val(elements);
 	return (TRUE);
 }
-

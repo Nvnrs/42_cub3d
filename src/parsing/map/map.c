@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:05:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 15:29:55 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:13:12 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ int	get_x_max(char	*desc_map)
 	int	curr_x;
 	int	i;
 
-	best_x = 0;
-	curr_x = 0;
-	i = 0;
+	init_int_to_zero(&best_x, &curr_x, &i, NULL);
 	while (desc_map[i])
 	{
 		if (desc_map[i] == '\n')
@@ -61,12 +59,11 @@ int	get_x_max(char	*desc_map)
 	return (best_x);
 }
 
-
 char	**init_tab_str(int row_max, int col_max, char c_fill)
 {
-	int	col;	
-	int	row;
-	char **tab;
+	int		col;	
+	int		row;
+	char	**tab;
 
 	row = 0;
 	tab = malloc((row_max + 1) * sizeof(char *));
@@ -94,7 +91,6 @@ t_map	*init_map_parsing(char	*desc_map)
 	map->x_max = get_x_max(desc_map);
 	map->y_max = get_y_max(desc_map);
 	map->grid = init_tab_str(map->y_max, map->x_max, 'V');
-	// print_tab(map->grid);
 	copy_desc_map_in_grid(map, desc_map);
 	print_map(map);
 	return (map);

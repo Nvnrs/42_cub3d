@@ -6,13 +6,13 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:44:34 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 15:02:45 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:15:43 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	set_player_info(t_player *player, t_map *map, int x, int y)
+void	set_default_player_info(t_player *player, int x, int y)
 {
 	player->x = (double)x;
 	player->y = (double)y;
@@ -20,6 +20,11 @@ static void	set_player_info(t_player *player, t_map *map, int x, int y)
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;
 	player->plane_y = 0.0;
+}
+
+static void	set_player_info(t_player *player, t_map *map, int x, int y)
+{
+	set_default_player_info(player, x, y);
 	if (map->grid[y][x] == 'N')
 	{
 		player->dir_y = -1.0;
@@ -45,9 +50,9 @@ static void	set_player_info(t_player *player, t_map *map, int x, int y)
 t_player	*init_player(t_map *map)
 {
 	t_player	*player;
-	int	y;
-	int	x;
-	
+	int			y;
+	int			x;
+
 	player = malloc(sizeof(t_player));
 	y = 0;
 	while (y < map->y_max)

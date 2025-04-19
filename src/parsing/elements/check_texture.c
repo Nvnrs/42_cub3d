@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:09:33 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:40:28 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:48:44 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ t_bool	is_texture(char *key)
 	return (FALSE);
 }
 
-
 t_bool	try_to_load_texture(char *val)
 {
-	mlx_texture_t 	*texture;
-	
+	mlx_texture_t	*texture;
+
 	texture = mlx_load_png(val);
 	if (!texture)
 		return (FALSE);
 	mlx_delete_texture(texture);
 	return (TRUE);
 }
-

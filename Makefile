@@ -28,6 +28,7 @@ SRC_INIT = $(SRC_DIR_INIT)/map.c \
 		$(SRC_DIR_INIT)/images.c \
 		$(SRC_DIR_INIT)/pixels_texture.c \
 		$(SRC_DIR_INIT)/player.c \
+		$(SRC_DIR_INIT)/elements_in_map.c \
 	
 SRC_DIR_DEBUG = $(SRC_DIR)/debug
 SRC_DEBUG = $(SRC_DIR_DEBUG)/map.c \

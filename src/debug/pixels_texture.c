@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:41:09 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 15:10:17 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:10:57 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	print_pixels_texture(mlx_texture_t *texture)
 	}
 }
 
-
 void	print_tab_pixels(uint32_t **tab, mlx_texture_t *texture)
 {
 	uint32_t	x;
@@ -50,5 +49,5 @@ void	print_tab_pixels(uint32_t **tab, mlx_texture_t *texture)
 		}
 		printf("\n");
 		y++;
-	}	
+	}
 }

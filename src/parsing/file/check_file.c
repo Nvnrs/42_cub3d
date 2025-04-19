@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:42:15 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:40:20 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:41:46 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,3 @@ t_bool	file_have_minimal_lines(char *file)
 	free_tab_str(lines);
 	return (have);
 }
-
-

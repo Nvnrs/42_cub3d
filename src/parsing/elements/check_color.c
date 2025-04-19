@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:08:59 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/16 14:40:24 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:42:26 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	channel_color_is_in_range(char *channel)
 t_bool	color_is_valid_for_split(char *color)
 {
 	int	i;
-	int comma_count;
+	int	comma_count;
 
 	i = 0;
 	comma_count = 0;
@@ -52,8 +52,6 @@ t_bool	color_is_valid_for_split(char *color)
 	}
 	return (FALSE);
 }
-
-
 
 t_bool	color_is_rgb(char *color)
 {
