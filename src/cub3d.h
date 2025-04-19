@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/18 17:40:53 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 10:53:36 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,28 @@ typedef struct	s_images
 	mlx_image_t	*minimap;
 } t_images;
 
+typedef struct s_texture
+{
+	uint32_t	width;
+	uint32_t	height;
+	uint8_t		bytes_per_pixel;
+	uint32_t	**pixels;
+}	t_texture;
+
 typedef struct s_textures
 {
-	mlx_texture_t*	north;
-	mlx_texture_t*	south;
-	mlx_texture_t*	east;
-	mlx_texture_t*	west;
+	// mlx_texture_t*	north;
+	// uint32_t	**north_pixels;
+	// mlx_texture_t*	south;
+	// uint32_t	**south_pixels;
+	// mlx_texture_t*	east;
+	// uint32_t	**east_pixels;
+	// mlx_texture_t*	west;
+	// uint32_t	**west_pixels;
+	t_texture	north;
+	t_texture	south;
+	t_texture	east;
+	t_texture	west;
 }	t_textures;
 
 typedef struct s_colors
@@ -146,8 +162,8 @@ void	calculate_perpendicular_wall_dist(t_ray *ray);
 void	draw_wall(t_ray *ray, t_images *images, int x, t_map map);
 
 void	find_wall_hitpoint(t_ray *ray, t_player player);
-void	find_texture_x(t_ray *ray, mlx_texture_t *texture);
-void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, mlx_texture_t *texture);
+void	find_texture_x(t_ray *ray, t_map map);
+void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture texture);
 
 
 void my_keyhook(mlx_key_data_t keydata, void* void_param);

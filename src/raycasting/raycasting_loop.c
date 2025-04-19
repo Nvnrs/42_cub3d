@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_loop.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:47:09 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/18 14:53:35 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 10:52:51 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	raycasting_loop(t_player player, t_map map, t_images *images)
 		set_side_dist(&ray, player, map_x, map_y);
 		cast(&ray, map, map_x, map_y);
 		calculate_perpendicular_wall_dist(&ray);
+		find_wall_hitpoint(&ray, player);
+		find_texture_x(&ray, map);
 		draw_wall(&ray, images, x, map);	
 		x++;
 	}

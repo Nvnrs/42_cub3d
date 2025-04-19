@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/18 17:44:23 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/19 10:43:12 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,6 @@ t_images	*init_images(mlx_t *mlx)
 // 	return (EXIT_SUCCESS);
 // }
 
-void	load_texture_in_map(t_map *map, t_key_val **map_elements)
-{
-	int	i;
-
-	i = 0;
-	while (map_elements[i])
-	{
-		if (ft_strcmp(map_elements[i]->key, "NO") == 0)
-			map->textures.north = mlx_load_png(map_elements[i]->val);
-		else if (ft_strcmp(map_elements[i]->key, "SO") == 0)
-			map->textures.south = mlx_load_png(map_elements[i]->val);
-		else if (ft_strcmp(map_elements[i]->key, "WE") == 0)
-			map->textures.west = mlx_load_png(map_elements[i]->val);
-		else if (ft_strcmp(map_elements[i]->key, "EA") == 0)
-			map->textures.east = mlx_load_png(map_elements[i]->val);
-		i++;
-	}
-}
-
 /**
  * Takes a string like: 255,0,255.
  * Convert it like: 0xFF00FFFF but in decimal -> 4278255615.
@@ -133,6 +114,102 @@ void	init_color_in_map(t_map *map, t_key_val **map_elements)
 	}
 }
 
+uint32_t	**init_tab_pixels_color(mlx_texture_t *texture)
+{
+	uint32_t	**tab;
+	int			x;
+	int			y;
+
+	tab = malloc((texture->height + 1) * sizeof(uint32_t *));
+	y = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		tab[y] = malloc(texture->width * sizeof(uint32_t));
+		while (x < texture->width)
+		{
+			tab[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	tab[y] = NULL;
+	return tab;
+}
+
+void	copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	y = 0;
+	x = 0;
+	i = 0;
+	while (y < texture->height)
+	{
+		x = 0;
+		while (x < texture->width)
+		{
+			tab[y][x] = texture->pixels[i] * 16777216 + texture->pixels[i + 1]  * 65536 + texture->pixels[i + 2]  * 256 + texture->pixels[i + 3];
+			i+= 4;
+			x++;
+		}		
+		y++;
+	}	
+}
+
+// void	format_textures_pixels(t_map *map)
+// {
+// 	map->textures.north_pixels = init_tab_pixels_color(map->textures.north);
+// 	copy_pixels_color_in_tab(map->textures.north_pixels, map->textures.north);
+// 	map->textures.south_pixels = init_tab_pixels_color(map->textures.south);
+// 	copy_pixels_color_in_tab(map->textures.south_pixels, map->textures.south);
+// 	map->textures.east_pixels = init_tab_pixels_color(map->textures.east);
+// 	copy_pixels_color_in_tab(map->textures.east_pixels, map->textures.east);
+// 	map->textures.west_pixels = init_tab_pixels_color(map->textures.west);
+// 	copy_pixels_color_in_tab(map->textures.west_pixels, map->textures.west);
+// }
+
+void	extract_info_from_texture(t_texture *texture_in_map, mlx_texture_t *texture)
+{
+	texture_in_map->width = texture->width;
+	texture_in_map->height = texture->height;
+	texture_in_map->bytes_per_pixel = texture->bytes_per_pixel;
+	texture_in_map->pixels = init_tab_pixels_color(texture);
+	copy_pixels_color_in_tab(texture_in_map->pixels, texture);
+	mlx_delete_texture(texture);
+}
+
+void	load_texture_in_map(t_map *map, t_key_val **map_elements)
+{
+	int	i;
+	mlx_texture_t	*texture;
+
+	i = 0;
+	while (map_elements[i])
+	{
+		if (ft_strcmp(map_elements[i]->key, "NO") == 0
+			|| ft_strcmp(map_elements[i]->key, "SO") == 0
+			||	ft_strcmp(map_elements[i]->key, "WE") == 0
+			|| ft_strcmp(map_elements[i]->key, "EA") == 0)
+			texture = mlx_load_png(map_elements[i]->val);
+		if (ft_strcmp(map_elements[i]->key, "NO") == 0)
+			extract_info_from_texture(&map->textures.north, texture);
+		else if (ft_strcmp(map_elements[i]->key, "SO") == 0)
+			extract_info_from_texture(&map->textures.south, texture);
+		else if (ft_strcmp(map_elements[i]->key, "WE") == 0)
+			extract_info_from_texture(&map->textures.west, texture);
+		else if (ft_strcmp(map_elements[i]->key, "EA") == 0)
+			extract_info_from_texture(&map->textures.east, texture);
+			// map->textures.north = mlx_load_png(map_elements[i]->val);
+			// map->textures.south = mlx_load_png(map_elements[i]->val);
+			// map->textures.west = mlx_load_png(map_elements[i]->val);
+			// map->textures.east = mlx_load_png(map_elements[i]->val);
+		i++;
+	}
+}
+
 t_map	*init_map2(t_key_val **map_elements, char *desc_map)
 {
 	t_map	*map;
@@ -145,6 +222,7 @@ t_map	*init_map2(t_key_val **map_elements, char *desc_map)
 	copy_desc_map_in_grid(map, desc_map);//peut etre strdup desc_map
 	// print_map(map);
 	load_texture_in_map(map, map_elements);
+	// format_textures_pixels(map);
 	init_color_in_map(map, map_elements);
 	return (map);
 }
@@ -260,29 +338,6 @@ void	put_pixels_texture(mlx_texture_t *texture, uint32_t **tab_pixels, t_data_to
 	}
 }
 
-uint32_t	**init_tab_pixels_color(mlx_texture_t *texture)
-{
-	uint32_t	**tab;
-	int			x;
-	int			y;
-
-	tab = malloc((texture->height + 1) * sizeof(uint32_t *));
-	y = 0;
-	while (y < texture->height)
-	{
-		x = 0;
-		tab[y] = malloc(texture->width * sizeof(uint32_t));
-		while (x < texture->width)
-		{
-			tab[y][x] = 0;
-			x++;
-		}
-		y++;
-	}
-	tab[y] = NULL;
-	return tab;
-}
-
 void	print_tab_pixels(uint32_t **tab, mlx_texture_t *texture)
 {
 	int	x;
@@ -298,28 +353,6 @@ void	print_tab_pixels(uint32_t **tab, mlx_texture_t *texture)
 			x++;
 		}
 		printf("\n");
-		y++;
-	}	
-}
-
-void	copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture)
-{
-	int	x;
-	int	y;
-	int	i;
-
-	y = 0;
-	x = 0;
-	i = 0;
-	while (y < texture->height)
-	{
-		x = 0;
-		while (x < texture->width)
-		{
-			tab[y][x] = texture->pixels[i] * 16777216 + texture->pixels[i + 1]  * 65536 + texture->pixels[i + 2]  * 256 + texture->pixels[i + 3];
-			i+= 4;
-			x++;
-		}		
 		y++;
 	}	
 }
@@ -350,7 +383,7 @@ void	test_texture(t_data_to_key_hook *data)
 	start.y = 0;
 	end.x = SCREEN_WIDTH;
 	end.y = SCREEN_HEIGHT;
-	texture = mlx_load_png("./texture.png");
+	texture = mlx_load_png("./error.png");
 	tab_pixels = init_tab_pixels_color(texture);
 	copy_pixels_color_in_tab(tab_pixels, texture);
 	// printf("Texture pixels :%d\n", texture->pixels[64]);
@@ -411,18 +444,18 @@ int	main(int argc, char *argv[])
 	player.plane_y = 0.66;
 	// print_map(map.grid, 10, 10);
 	// draw_bg_minimap(images);
-	// raycasting_loop(player, *map, images);
+	raycasting_loop(player, *map, images);
 	// draw_border_minimap(images);
 	// draw_player_on_minimap(player, images);
-	// mlx_image_to_window(mlx, images->wall, 0, 0);
+	mlx_image_to_window(mlx, images->wall, 0, 0);
 	// mlx_image_to_window(mlx, images->minimap,
 		// SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
 	data.player = &player;
 	data.map = map;
 	data.images = images;
 	data.mlx = mlx;
-	test_texture(&data);
-	// mlx_key_hook(mlx, &my_keyhook, &data);
+	// test_texture(&data);
+	mlx_key_hook(mlx, &my_keyhook, &data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);
