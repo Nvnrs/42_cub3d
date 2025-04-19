@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 11:24:59 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 13:24:06 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:00:09 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,12 +248,12 @@ void	set_player_info(t_player *player, t_map *map, int x, int y)
 	else if (map->grid[y][x] == 'W')
 	{
 		player->dir_x = -1.0;
-		player->plane_y = 0.66;
+		player->plane_y = -0.66;
 	}
 	else if (map->grid[y][x] == 'E')
 	{
 		player->dir_x = 1.0;
-		player->plane_y = -0.66;
+		player->plane_y = 0.66;
 	}
 }
 
@@ -430,7 +430,7 @@ void	test_texture(t_data_to_key_hook *data)
 int	main(int argc, char *argv[])
 {
 	// t_player	*player;
-	t_player	player;
+	t_player	*player;
 	t_map		*map;
 	t_images	*images;
 	mlx_t		*mlx;
@@ -445,25 +445,25 @@ int	main(int argc, char *argv[])
 	printf("Floor color: %u\n", map->colors.floor);
 	printf("Ceiling color: %u\n", map->colors.ceiling);
 	draw_and_put_bg(mlx, images->bg, map);
-	// player = init_player(map);
+	player = init_player(map);
 	// map.grid = map_test(10, 10);
 	// map.x_max = 10;
 	// map.y_max = 10;
-	player.x = 1.5;
-	player.y = 2.5;
-	player.dir_x = -1.0;
-	player.dir_y = 0.0;
-	player.plane_x = 0.0;
-	player.plane_y = 0.66;
+	// player.x = 1.5;
+	// player.y = 2.5;
+	// player.dir_x = -1.0;
+	// player.dir_y = 0.0;
+	// player.plane_x = 0.0;
+	// player.plane_y = 0.66;
 	// print_map(map.grid, 10, 10);
 	// draw_bg_minimap(images);
-	raycasting_loop(player, *map, images);
+	raycasting_loop(*player, *map, images);
 	// draw_border_minimap(images);
 	// draw_player_on_minimap(player, images);
 	mlx_image_to_window(mlx, images->wall, 0, 0);
 	// mlx_image_to_window(mlx, images->minimap,
 		// SCREEN_WIDTH - SCREEN_HEIGHT / 4, 0);
-	data.player = &player;
+	data.player = player;
 	data.map = map;
 	data.images = images;
 	data.mlx = mlx;
