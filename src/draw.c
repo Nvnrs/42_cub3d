@@ -6,13 +6,14 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 09:19:48 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:29:04 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color)
+void	fill_zone(t_coord start, t_coord end, mlx_image_t *image,
+			uint32_t color)
 {
 	int	y;
 	int	x;
@@ -28,7 +29,7 @@ void	fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color)
 			x++;
 		}
 		y++;
-	}	
+	}
 }
 
 void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map)
@@ -38,7 +39,6 @@ void	draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map)
 	t_coord	ground_start;
 	t_coord	ground_end;
 
-	// draw sky
 	sky_start.x = 0;
 	sky_start.y = 0;
 	sky_end.x = SCREEN_WIDTH;
@@ -64,20 +64,21 @@ void	reset_wall_image(t_images *images)
 	fill_zone(start, end, images->wall, 0x00000000);
 }
 
-void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture texture)
+void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x,
+			t_texture texture)
 {
-	double	step;
-	double	tex_pos;
-	int		y;
-	int		tex_y;
+	double		step;
+	double		tex_pos;
+	int			y;
+	int			tex_y;
 	uint32_t	color;
 
 	step = 1.0 * texture.height / ray->line_height;
-	tex_pos = (ray->draw_start - SCREEN_HEIGHT / 2 + ray->line_height / 2) * step;
+	tex_pos = (ray->draw_start - SCREEN_HEIGHT / 2 + ray->line_height / 2)
+		* step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		// tex_y = (int)tex_pos & (texture.height - 1);
 		if (tex_pos < 0)
 			tex_y = 0;
 		else if (tex_pos > texture.height - 1)
@@ -85,7 +86,7 @@ void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture
 		else
 			tex_y = tex_pos;
 		tex_pos += step;
-		color = texture.pixels[tex_y][ray->tex_x];//il faut transformer le contenu de pixels
+		color = texture.pixels[tex_y][ray->tex_x];
 		mlx_put_pixel(image, x, y, color);
 		y++;
 	}
