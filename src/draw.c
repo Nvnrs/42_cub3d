@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:20:08 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 10:59:46 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:19:48 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,6 @@ void	draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture
 			tex_y = tex_pos;
 		tex_pos += step;
 		color = texture.pixels[tex_y][ray->tex_x];//il faut transformer le contenu de pixels
-		mlx_put_pixel(image, x, y, color);
-		y++;
-	}
-}
-
-void	draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color)
-{
-	int y;
-
-	y = draw_start;
-	while (y <= draw_end)
-	{
 		mlx_put_pixel(image, x, y, color);
 		y++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:32:33 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 17:20:48 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:20:28 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,29 @@
 # define FOV 			60.0
 # define M_PI			3.14159265358979323846
 
-typedef struct	s_key_val
+typedef struct s_key_val
 {
-	char *key;
-	char *val;
+	char	*key;
+	char	*val;
 }	t_key_val;
 
-typedef struct	s_coord
+typedef struct s_coord
 {
-	int x;
-	int y;
-} t_coord;
+	int	x;
+	int	y;
+}	t_coord;
 
-typedef struct	s_coord_float
+typedef struct s_coord_float
 {
-	float x;
-	float y;
-} t_coord_float;
+	float	x;
+	float	y;
+}	t_coord_float;
 
-typedef struct	s_images
+typedef struct s_images
 {
-	mlx_image_t *bg;
-	mlx_image_t *wall;
-} t_images;
+	mlx_image_t	*bg;
+	mlx_image_t	*wall;
+}	t_images;
 
 typedef struct s_texture
 {
@@ -76,11 +76,11 @@ typedef struct s_colors
 	unsigned int	ceiling;
 }	t_colors;
 
-typedef	struct s_map
+typedef struct s_map
 {
-	char **grid;
-	int	x_max;
-	int	y_max;
+	char		**grid;
+	int			x_max;
+	int			y_max;
 	t_textures	textures;
 	t_colors	colors;
 }	t_map;
@@ -123,7 +123,7 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 	double	wall_x;
-	int	tex_x;
+	int		tex_x;
 }	t_ray;
 
 typedef struct s_data_to_keyhook
@@ -140,15 +140,17 @@ t_map		*init_map(char *filename);
 t_player	*init_player(t_map *map);
 void		free_map(t_map *map);
 void		free_images(mlx_t *mlx, t_images *images);
-void		free_all_and_terminate(mlx_t *mlx, t_player *player, t_map *map, t_images *images);
+void		free_all_and_terminate(mlx_t *mlx, t_player *player,
+				t_map *map, t_images *images);
 void		init_textures_in_map(t_map *map, t_key_val **map_elements);
 void		init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements);
 // DRAW
-void		fill_zone(t_coord start, t_coord end, mlx_image_t *image, uint32_t color);
+void		fill_zone(t_coord start, t_coord end, mlx_image_t *image,
+				uint32_t color);
 void		draw_and_put_bg(mlx_t *mlx, mlx_image_t *bg, t_map *map);
 void		reset_wall_image(t_images *images);
-void		draw_vertical_line(mlx_image_t *image, int draw_start, int draw_end, int x, uint32_t color);
-void		draw_vertical_line_texture(mlx_image_t *image, t_ray *ray, int x, t_texture texture);
+void		draw_vertical_line_texture(mlx_image_t *image, t_ray *ray,
+				int x, t_texture texture);
 // PIXELS
 uint32_t	**init_tab_pixels_color(mlx_texture_t *texture);
 void		copy_pixels_color_in_tab(uint32_t **tab, mlx_texture_t *texture);
@@ -167,7 +169,7 @@ void		draw_wall(t_ray *ray, t_images *images, int x, t_map map);
 void		find_wall_hitpoint(t_ray *ray, t_player player);
 void		find_texture_x(t_ray *ray, t_map map);
 // KEYHOOK
-void 		my_keyhook(mlx_key_data_t keydata, void* void_param);
+void		my_keyhook(mlx_key_data_t keydata, void *void_param);
 void		walk_forward(t_data_to_key_hook *param, double move_speed);
 void		walk_backward(t_data_to_key_hook *param, double move_speed);
 void		strafe_right(t_data_to_key_hook *param, double move_speed);
