@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 14:44:34 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 17:15:43 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:45:20 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	set_default_player_info(t_player *player, int x, int y)
 {
-	player->x = (double)x;
-	player->y = (double)y;
+	player->x = (double)x + 0.5;
+	player->y = (double)y + 0.5;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;

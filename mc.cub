@@ -1,0 +1,19 @@
+NO ./textures/dirt.png
+SO ./textures/dirt.png
+WE ./textures/dirt.png
+EA ./textures/dirt.png
+
+F 79,32,15
+C 79,32,15
+
+111111111
+100100001
+100000101
+111100101
+100000001
+100110011
+100100111
+100110011
+100010001
+1E1000001
+111111111
