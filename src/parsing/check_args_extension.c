@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_args_extension.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:39:07 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 10:47:56 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:35:17 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-#define MSG_ERR_NB_ARGS "The program need a file whith map configuration\n"
+#define MSG_ERR_NB_ARGS "The program needs only file with map configuration\n"
 #define MSG_ERR_EXTENSION "Extension is invalid. \
 The program accept only \".cub\" extension\n"
 

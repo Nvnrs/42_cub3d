@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:08:59 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 17:42:26 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:51:23 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	channel_color_is_in_range(char *channel)
 	int	channel_int;
 
 	channel_int = ft_atoi(channel);
-	if (channel_int > 255 && channel_int >= 0)
+	if (channel_int > 255 || channel_int < 0)
 		return (FALSE);
 	return (TRUE);
 }

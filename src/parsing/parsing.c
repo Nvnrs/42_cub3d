@@ -6,14 +6,14 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:27:25 by nicolas           #+#    #+#             */
-/*   Updated: 2025/04/19 17:37:54 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:33:41 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-#define MSG_ERR_FILE_LINES "The file need have 9 lines minimal\n"
+#define MSG_ERR_FILE_LINES "The file needs a minimum of 9 non-empty lines\n"
 #define MSG_ERR_FILE_READ "The file is not readable\n"
 
 t_bool	map_is_valid(int argc, char **argv)

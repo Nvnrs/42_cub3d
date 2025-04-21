@@ -6,16 +6,16 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:41:09 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 17:48:01 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:38:26 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-#define MSG_ERR_ELEMENTS_INVALID "Elements (textures / colors) format are not valid, please make you sure :\n\
+#define MSG_ERR_ELEMENTS_INVALID "Elements (textures / colors) format are not valid, please make sure :\n\
 - elements are before map description\n\
-- elements are a duo key _val for example : NO ./my_texture_path"
+- elements are a duo key val for example : NO ./my_texture_path"
 #define MSG_ERR_KEYS "The keys handle are : NO, SO, WE, EA, F, C\n"
 #define MSG_ERR_COLOR "The color is not RGB.\n"
 
