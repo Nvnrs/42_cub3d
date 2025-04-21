@@ -1,0 +1,11 @@
+NO ./textures/dirt.png
+SO ./textures/dirt.png
+WE ./textures/dirt.png
+EA ./textures/dirt.png
+
+F 128,128,128
+C 79,32,15
+
+1
+E
+1

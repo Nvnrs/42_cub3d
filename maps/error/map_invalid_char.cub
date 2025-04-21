@@ -1,7 +1,7 @@
 NO ./textures/dirt.png
 SO ./textures/dirt.png
 WE ./textures/dirt.png
-EA ./textures/dirt.pngeee
+EA ./textures/dirt.png
 
 F 128,128,128
 C 79,32,15
@@ -10,7 +10,7 @@ C 79,32,15
 1E0100001
 100000101
 111100101
-100000001
+10000A001
 100110011
 100100111
 100110011
