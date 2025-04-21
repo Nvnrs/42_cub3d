@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:47:09 by pchateau          #+#    #+#             */
-/*   Updated: 2025/04/19 10:52:51 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:32:21 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	raycasting_loop(t_player player, t_map map, t_images *images)
 		calculate_perpendicular_wall_dist(&ray);
 		find_wall_hitpoint(&ray, player);
 		find_texture_x(&ray, map);
-		draw_wall(&ray, images, x, map);	
+		draw_wall(&ray, images, x, map);
 		x++;
 	}
 }
