@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:08:59 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 14:51:23 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:58:27 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ t_bool	color_is_valid_for_split(char *color)
 	return (FALSE);
 }
 
+t_bool	length_color_is_valid(char *channel)
+{
+	int	i;
+	int	length;
+
+	i = 0;
+	length = 0;
+	while (channel[i] == '0')
+		i++;
+	while (channel[i])
+	{
+		length++;
+		i++;
+	}
+	if (length > 3)
+		return (FALSE);
+	return (TRUE);
+}
+
 t_bool	color_is_rgb(char *color)
 {
 	char	**channels;
@@ -66,7 +85,8 @@ t_bool	color_is_rgb(char *color)
 	channels = ft_split(color, ',');
 	while (channels[i])
 	{
-		if (!channel_color_is_in_range(channels[i]))
+		if (!length_color_is_valid(channels[i])
+			||!channel_color_is_in_range(channels[i]))
 			return (free_tab_str(channels), FALSE);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:17:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 14:49:57 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:59:42 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ static unsigned int	convert_rgb_to_rgba(char *rgb, unsigned int a)
 
 void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 {
-	int		i;
-	char	*floor_str;
-	unsigned int	floor_ui;
-	char	*ceiling_str;
+	int				i;
+	char			*floor_str;
+	char			*ceiling_str;
 	unsigned int	ceiling_ui;
 
 	i = 0;
@@ -49,12 +48,11 @@ void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 			ceiling_str = map_elements[i]->val;
 		i++;
 	}
-	ceiling_ui= convert_rgb_to_rgba(ceiling_str, 255);
-	floor_ui = convert_rgb_to_rgba(floor_str, 255);
+	ceiling_ui = convert_rgb_to_rgba(ceiling_str, 255);
+	map->colors.floor = convert_rgb_to_rgba(floor_str, 255);
 	map->colors.ceiling = ceiling_ui;
-	if (floor_ui == ceiling_ui)
+	if (map->colors.floor == ceiling_ui)
 		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, 127);
-	map->colors.floor = floor_ui;
 }
 
 static void	extract_info_from_texture(t_texture *texture_in_map,
