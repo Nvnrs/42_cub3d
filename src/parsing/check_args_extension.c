@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args_extension.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:39:07 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/19 17:41:06 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:47:56 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #define MSG_ERR_NB_ARGS "The program need a file whith map configuration\n"
 #define MSG_ERR_EXTENSION "Extension is invalid. \
-The programm accept only \".cub\" extension\n"
+The program accept only \".cub\" extension\n"
 
 t_bool	filename_contain_one_point(char *filename)
 {
