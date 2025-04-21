@@ -6,7 +6,7 @@
 /*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:17:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 10:18:37 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:15:45 by pchateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * Takes a string like: 255,0,255.
  * Convert it like: 0xFF00FFFF but in decimal -> 4278255615.
  */
-static unsigned int	convert_rgb_to_rgba(char *rgb, char a)
+static unsigned int	convert_rgb_to_rgba(char *rgb, unsigned int a)
 {
 	char				**rgb_split;
 	unsigned int		r;
@@ -48,10 +48,10 @@ void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 		i++;
 	}
 	if (ft_strcmp(floor_str, ceiling_str) == 0)
-		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, (char)127);
+		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, 127);
 	else
-		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, (char)255);
-	map->colors.floor = convert_rgb_to_rgba(floor_str, (char)255);
+		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, 255);
+	map->colors.floor = convert_rgb_to_rgba(floor_str, 255);
 }
 
 static void	extract_info_from_texture(t_texture *texture_in_map,
