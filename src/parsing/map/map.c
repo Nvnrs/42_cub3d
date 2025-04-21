@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pchateau <pchateau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:05:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 10:34:13 by pchateau         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:25:37 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ t_map	*init_map_parsing(char	*desc_map)
 	map->y_max = get_y_max(desc_map);
 	map->grid = init_tab_str(map->y_max, map->x_max, 'V');
 	copy_desc_map_in_grid(map, desc_map);
-	// print_map(map);
 	return (map);
 }
 
