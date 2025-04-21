@@ -3,8 +3,8 @@ SO ./textures/dirt.png
 WE ./textures/dirt.png
 EA ./textures/dirt.png
 
-F 255,255,255
-C 255,255,255
+F 00000,00,00000000000000000
+C 00,0,000
 
 111111111
 1E0100001

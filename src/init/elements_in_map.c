@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:17:51 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 14:59:42 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/21 15:00:50 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 	int				i;
 	char			*floor_str;
 	char			*ceiling_str;
-	unsigned int	ceiling_ui;
 
 	i = 0;
 	while (map_elements[i])
@@ -48,10 +47,9 @@ void	init_floor_and_ceiling_in_map(t_map *map, t_key_val **map_elements)
 			ceiling_str = map_elements[i]->val;
 		i++;
 	}
-	ceiling_ui = convert_rgb_to_rgba(ceiling_str, 255);
 	map->colors.floor = convert_rgb_to_rgba(floor_str, 255);
-	map->colors.ceiling = ceiling_ui;
-	if (map->colors.floor == ceiling_ui)
+	map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, 255);
+	if (map->colors.floor == map->colors.ceiling)
 		map->colors.ceiling = convert_rgb_to_rgba(ceiling_str, 127);
 }
 
