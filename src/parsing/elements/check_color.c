@@ -6,7 +6,7 @@
 /*   By: nveneros <nveneros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:08:59 by nveneros          #+#    #+#             */
-/*   Updated: 2025/04/21 14:58:27 by nveneros         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:54:49 by nveneros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_bool	color_is_valid_for_split(char *color)
 	comma_count = 0;
 	while (color[i])
 	{
+		if (!ft_isdigit(color[i]))
+			return (FALSE);
 		while (color[i] && ft_isdigit(color[i]))
 			i++;
 		if (color[i] == ',')
@@ -83,6 +85,8 @@ t_bool	color_is_rgb(char *color)
 	if (!color_is_valid_for_split(color))
 		return (FALSE);
 	channels = ft_split(color, ',');
+	if (len_tab(channels) != 3)
+		return (free_tab_str(channels), FALSE);
 	while (channels[i])
 	{
 		if (!length_color_is_valid(channels[i])
